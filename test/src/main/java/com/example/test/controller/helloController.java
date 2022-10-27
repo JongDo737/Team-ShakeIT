@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class helloController {
 
     @GetMapping("/test")
-    public String printHello(){
+    public String printHello() throws Exception {
+//        IndexAPI indexAPI = new IndexAPI();
+//        indexAPI.getIndexApi3();
         return "Hello";
     }
 

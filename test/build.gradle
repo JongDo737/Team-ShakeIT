@@ -26,6 +26,11 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	// mysql
+	implementation 'mysql:mysql-connector-java'
+	// jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 }
 
 tasks.named('test') {
