@@ -1,101 +1,97 @@
 package com.example.test.api;
 
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 
 public class IndexAPI {
-    public void getIndexApi3() throws Exception {
-        StringBuilder urlBuilder = new StringBuilder(
-                "https://open.assembly.go.kr/portal/openapi/nknalejkafmvgzmpt"); /* URL */
 
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
-//        System.out.println("Response code: " + conn.getResponseCode());
-        BufferedReader rd;
-
-        // getResponseCode가 200이상 300이하일때는 정상적으로 작동합니다.
-        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-        url = null;
-        // StringBuilder로 위에 파라미터 더 한값을 toString으로 불러옵니다.
-        // 그리고 println으로 확인을 하면 xml형식이 나오게됩니다.
-//        System.out.println(sb.toString());
-
-        // 나중에 사용할 map을 선언해줍니다.
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        List<HashMap<String, String>> list = getResultMap3(sb.toString());
-        for(int i=0; i<list.size(); i++){
-            System.out.println(list.get(i).keySet());
-
-        }
-//        for (Map<String, String> tmpMap : list) {
-//            // 사망자 수
-//            map.put("deathCnt", tmpMap.get("deathCnt"));
-//            // 확진자수
-//            map.put("decideCnt", tmpMap.get("decideCnt"));
-//        }
-
-//        totalRespDto.setDeathCnt(map.get("deathCnt"));
-//        totalRespDto.setDecideCnt(map.get("decideCnt"));
-
+    // tag값의 정보를 가져오는 메소드
+    private static String getTagValue(String tag, Element eElement) {
+        NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+        Node nValue = (Node) nlList.item(0);
+        if(nValue == null)
+            return null;
+        return nValue.getNodeValue();
     }
 
-    // 3번째 테이블 xml 파일 사용
-    public List<HashMap<String, String>> getResultMap3(String data) throws Exception {
+    public static void getAPIList() throws ParserConfigurationException, IOException, SAXException {
+        int page = 1;  // 페이지 초기값
+        // 총 개수 가져오기
+        int totalCount = totalCount();
+        try{
+//            while(true){
+                // parsing할 url 지정(API 키 포함해서)
+                String url = "https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?"
+                        +"KEY=679a42edc23e42689b7f234817f46fc6"
+                        +"&pIndex="+page
+                        +"&pSize="+totalCount;
+//https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?KEY=679a42edc23e42689b7f234817f46fc6&pIndex=1&pSize=50
 
-        // 결과값을 넣어줄 map을 선언해줍니다.
-        List<HashMap<String, String>> resultMap = new LinkedList<>();
+                DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+                Document doc = dBuilder.parse(url);
 
-        InputSource is = new InputSource(new StringReader(data));
+                // root tag
+                doc.getDocumentElement().normalize();
+                System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-        // Document 클래스로 xml데이터를 취득합니다.
-        org.w3c.dom.Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+                // 파싱할 tag
+                NodeList nList = doc.getElementsByTagName("row");
+                for(int temp = 0; temp < nList.getLength(); temp++){
+                    Node nNode = nList.item(temp);
+                    if(nNode.getNodeType() == Node.ELEMENT_NODE){
 
-        // xPath 팩토리로 객체를 만듭니다.
-        XPath xpath = XPathFactory.newInstance().newXPath();
+                        Element eElement = (Element) nNode;
+                        System.out.println("######################");
+                        //System.out.println(eElement.getTextContent());
+                        System.out.println("의안ID  : " +getTagValue("DIV", eElement));
+                        System.out.println("의원명  : " +getTagValue("CHM_PN", eElement));
+                        System.out.println("재임기간 : " +getTagValue("CHM_APTM_YS", eElement));
+                        System.out.println("몇 회차 재임  : " +getTagValue("UNIT_NM", eElement));
+                    }  // for end
+                }  // if end
 
-        // xPath를 컴파일한 후에 node단위로 데이터를 수집합니다.
-        NodeList nodeList = (NodeList) xpath.compile("/nknalejkafmvgzmpt/row").evaluate(document,
-                XPathConstants.NODESET);
-        int nodeListCount = nodeList.getLength();
-        for (int i = 0; i < nodeListCount; i++) {
-            NodeList childNode = nodeList.item(i).getChildNodes();
-            HashMap<String, String> nodeMap = new HashMap<String, String>();
-            int childNodeCount = childNode.getLength();
-            for (int j = 0; j < childNodeCount; j++) {
-                nodeMap.put(childNode.item(j).getNodeName(), childNode.item(j).getTextContent());
-            }
-            resultMap.add(nodeMap);
-        }
 
-        return resultMap;
+                System.out.println("page number : "+page);
+//                if(page > 2){
+//                    break;
+//                }
+//                page += 1;
+//            }  // while end
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }  // try~catch end
+    }  // main end
+    public static int totalCount() throws ParserConfigurationException, IOException, SAXException {
+        int page = 1;
+        String url = "https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?"
+                +"KEY=679a42edc23e42689b7f234817f46fc6"
+                +"&pIndex="+page
+                +"&pSize=1";
+
+        DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+        Document doc = dBuilder.parse(url);
+
+        // root tag
+        doc.getDocumentElement().normalize();
+
+        // 파싱할 tag
+        NodeList countList = doc.getElementsByTagName("head");
+        // 총 수 출력
+        int totalCount = Integer.parseInt(getTagValue("list_total_count",(Element) ((Node)countList.item(0))));
+        System.out.println("총 국회의원 수 : "+ totalCount);
+        return totalCount;
     }
-}
+}  // class end
+

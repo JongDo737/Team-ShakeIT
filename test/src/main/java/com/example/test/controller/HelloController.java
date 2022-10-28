@@ -1,5 +1,7 @@
 package com.example.test.controller;
 
+import com.example.test.api.IndexAPI;
+import com.example.test.api.MemberOfCongressAPI;
 import com.example.test.entity.TestEntity;
 import com.example.test.repository.TestRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,12 @@ public class HelloController {
 
     @GetMapping("/test")
     public List<TestEntity> printHello() throws Exception {
+        return testRepository.findAll();
+    }
+    @GetMapping("/api")
+    public List<TestEntity> printAPI() throws Exception {
+//        MemberOfCongressAPI.getAPIList();
+        IndexAPI.getAPIList();
         return testRepository.findAll();
     }
 
