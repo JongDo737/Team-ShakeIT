@@ -25,5 +25,10 @@ public class HelloController {
         IndexAPI.getAPIList();
         return testRepository.findAll();
     }
-
+//    @GetMapping("/refresh")
+//    public List<TestEntity> refreshDB() throws Exception {
+////        MemberOfCongressAPI.getAPIList();
+//        IndexAPI.getAPIList();
+//        return testRepository.findAll();
+//    }
 }
