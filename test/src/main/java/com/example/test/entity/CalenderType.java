@@ -2,10 +2,7 @@ package com.example.test.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,6 +10,7 @@ import javax.persistence.Table;
 public class CalenderType {
     @Id
     private int type;
-    @Column(length = 45)
+
+    @Column(columnDefinition = "VARCHAR(45)", nullable = false)
     private String type_desc;
 }
