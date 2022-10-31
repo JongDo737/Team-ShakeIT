@@ -1,12 +1,18 @@
 package com.example.test.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "CongressOfMember")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CongressOfMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
