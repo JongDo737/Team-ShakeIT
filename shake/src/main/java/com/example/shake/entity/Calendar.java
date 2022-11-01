@@ -1,9 +1,9 @@
-package com.example.test.entity;
+package com.example.shake.entity;
 
 import lombok.Data;
-import org.hibernate.type.CalendarType;
 
 import javax.persistence.*;
+
 
 @Data
 @Entity
