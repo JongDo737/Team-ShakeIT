@@ -30,10 +30,11 @@ public class IndexAPI {
         try{
 //            while(true){
 //                 parsing할 url 지정(API 키 포함해서)
-                String url = "https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?"
-                        +"KEY=679a42edc23e42689b7f234817f46fc6"
-                        +"&pIndex="+page
-                        +"&pSize="+totalCount;
+//                String url = "https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?"
+//                        +"KEY=679a42edc23e42689b7f234817f46fc6"
+//                        +"&pIndex="+page
+//                        +"&pSize="+totalCount;
+            String url = "https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu";
 //https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?KEY=679a42edc23e42689b7f234817f46fc6&pIndex=1&pSize=50
 //                String url = "https://apis.data.go.kr/9710000/NationalAssemblyInfoService/getMemberCurrStateList?serviceKey=KoUHhFgcXAWFHvii7YKfxL2cdQMYE7j0dUoxZZXryPaJ9lz3HH463WOAopzv0XXAm66dHnxiUGjzj9Zk87ATCw%3D%3D&numOfRows=10&pageNo=1";
                 DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
@@ -45,7 +46,7 @@ public class IndexAPI {
                 System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
                 // 파싱할 tag
-                NodeList nList = doc.getElementsByTagName("response/body/items/item");
+                NodeList nList = doc.getElementsByTagName("row");
                 for(int temp = 0; temp < nList.getLength(); temp++){
                     Node nNode = nList.item(temp);
                     if(nNode.getNodeType() == Node.ELEMENT_NODE){
@@ -53,7 +54,7 @@ public class IndexAPI {
                         Element eElement = (Element) nNode;
                         System.out.println("######################");
                         //System.out.println(eElement.getTextContent());
-                        System.out.println("의안ID  : " +getTagValue("jpgLink", eElement));
+                        System.out.println("의안ID  : " +getTagValue("HG_NM", eElement));
 //                        System.out.println("의원명  : " +getTagValue("CHM_PN", eElement));
 //                        System.out.println("재임기간 : " +getTagValue("CHM_APTM_YS", eElement));
 //                        System.out.println("몇 회차 재임  : " +getTagValue("UNIT_NM", eElement));

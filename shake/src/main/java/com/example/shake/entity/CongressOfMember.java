@@ -19,44 +19,55 @@ public class CongressOfMember {
     private Long id;
 
     @Column(columnDefinition = "VARCHAR(45)")
-    private String daesu;   // 몇 대 국회의원
-
+    private String HG_NM;   // 이름
     @Column(columnDefinition = "VARCHAR(45)")
-    private String party;       // 정당
-
+    private String HJ_NM;       // 한자명
     @Column(columnDefinition = "VARCHAR(45)")
-    private String name;        //이름
-
+    private String ENG_NM;        //영문명칭
     @Column(columnDefinition = "VARCHAR(45)")
-    private String pictureURL;        //사진 정보
-
+    private String BTH_GBN_NM;        //음/양력
     @Column(columnDefinition = "VARCHAR(45)")
-    private String region;      // 선거구
-
+    private String BTH_DATE;      // 생년월일
     @Column(columnDefinition = "VARCHAR(45)")
-    private String sex;         // 성별
-
+    private String img_URL;
     @Column(columnDefinition = "VARCHAR(45)")
-    private String birth;      // 생일
-
+    private String JOB_RES_NM;         // 직책명
     @Column(columnDefinition = "VARCHAR(45)")
-    private String re_election; //재선
-
+    private String POLY_NM;      // 정당명
     @Column(columnDefinition = "VARCHAR(45)")
-    private String elected;  // 당선
-
+    private String ORIG_NM; //선거구
     @Column(columnDefinition = "VARCHAR(45)")
-    private String elect_gbn_nm; //선거구 구분
-
+    private String ELECT_GBN_NM;  // 선거구구분
     @Column(columnDefinition = "VARCHAR(45)")
-    private String eng_name; // 영어이름
-
+    private String CMIT_NM; //대표 위원회
     @Column(columnDefinition = "VARCHAR(45)")
-    private String cha_name; // 한자이름
-
+    private String CMITS; // 소속 위원회 목록
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String REELE_GBN_NM; // 재선
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String UNITS;        // 당선
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String SEX_GBN_NM;        // 성별
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String TEL_NO;        // 전화번호
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String E_MAIL;        // 이메일
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String HOMEPAGE;        // 홈페이지
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String STAFF;        // 보좌관
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String SECRETARY;        // 비서관
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String SECRETARY2;        // 비서
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String MONA_CD;        // 국회의원코드
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String MEM_TITLE;        // 약력
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String ASSEM_ADDR;        // 사무실 호실
     @Column(columnDefinition = "VARCHAR(45)")
     private String create_date;        // 생성날짜
-
     @Column(columnDefinition = "VARCHAR(45)")
     private String update_date;        // 수정날짜
 }
