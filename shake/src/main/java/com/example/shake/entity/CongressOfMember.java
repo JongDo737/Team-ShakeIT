@@ -38,9 +38,9 @@ public class CongressOfMember {
     private String ORIG_NM; //선거구
     @Column(columnDefinition = "VARCHAR(45)")
     private String ELECT_GBN_NM;  // 선거구구분
-    @Column(columnDefinition = "VARCHAR(45)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String CMIT_NM; //대표 위원회
-    @Column(columnDefinition = "VARCHAR(45)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String CMITS; // 소속 위원회 목록
     @Column(columnDefinition = "VARCHAR(45)")
     private String REELE_GBN_NM; // 재선
@@ -62,7 +62,7 @@ public class CongressOfMember {
     private String SECRETARY2;        // 비서
     @Column(columnDefinition = "VARCHAR(45)")
     private String MONA_CD;        // 국회의원코드
-    @Column(columnDefinition = "VARCHAR(45)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String MEM_TITLE;        // 약력
     @Column(columnDefinition = "VARCHAR(45)")
     private String ASSEM_ADDR;        // 사무실 호실

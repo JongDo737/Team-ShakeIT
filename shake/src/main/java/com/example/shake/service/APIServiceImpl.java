@@ -1,5 +1,6 @@
 package com.example.shake.service;
 
+import com.example.shake.api.Calendar;
 import com.example.shake.api.MemberOfCongressAPI;
 import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.entity.CongressOfMember;
@@ -23,6 +24,8 @@ public class APIServiceImpl implements APIService {
 
         for (int i = 0; i < members.size(); i++) {
             members.get(i).setId(Long.parseLong(i+""));
+            members.get(i).setCreate_date(Calendar.getDate());
+            members.get(i).setUpdate_date(Calendar.getDate());
             CongressOfMember congressOfMember = members.get(i).toEntity();
             congressOfMemberRepository.save(congressOfMember);
             System.out.println(congressOfMember.getHG_NM());

@@ -1,5 +1,6 @@
 package com.example.shake.controller;
 
+import com.example.shake.api.Calendar;
 import com.example.shake.api.IndexAPI;
 import com.example.shake.api.MemberOfCongressAPI;
 import com.example.shake.dto.CongressOfMemberDto;
@@ -23,19 +24,24 @@ import java.util.List;
 public class HelloController {
     final TestRepository testRepository;
     final APIService apiService;
+    final CongressOfMemberRepository congressOfMemberRepository;
 
     @GetMapping("/test")
-    public List<TestEntity> printHello() throws Exception {
+    public String printHello() throws Exception {
         IndexAPI.getAPIList();
-        return testRepository.findAll();
+        return Calendar.getDate();
     }
     @GetMapping("/api")
     public List<TestEntity> printAPI() throws Exception {
         return testRepository.findAll();
     }
-    @GetMapping("/insertCongressMember")
+    @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
         List<CongressOfMemberDto> congressOfMemberDtos = MemberOfCongressAPI.getAPIList();
         return apiService.insertCongressOfMember(congressOfMemberDtos);
+    }
+    @GetMapping("/getCongressMember")
+    public List<CongressOfMember> getMember()  {
+        return congressOfMemberRepository.findAll();
     }
 }

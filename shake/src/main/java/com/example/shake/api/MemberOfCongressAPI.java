@@ -36,7 +36,7 @@ public class MemberOfCongressAPI {
             String url = "https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu?"
                     +"KEY=679a42edc23e42689b7f234817f46fc6"
                     +"&pIndex="+page
-                    +"&pSize="+5;
+                    +"&pSize="+299;
 //https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?KEY=679a42edc23e42689b7f234817f46fc6&pIndex=1&pSize=50
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
