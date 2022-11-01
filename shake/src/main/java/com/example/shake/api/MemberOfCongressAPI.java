@@ -16,12 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberOfCongressAPI {
-    public static void getMemberList() throws ParserConfigurationException, IOException, SAXException {
-        List<CongressOfMemberDto> totalList = getAPIList();
-        for(int i=150; i<5; i++) {
-            System.out.println(totalList.get(i).getHG_NM()+" "+ totalList.get(i).getImg_URL());
-        }
-    }
 
     // tag값의 정보를 가져오는 메소드
     private static String getTagValue(String tag, Element eElement) {
@@ -42,7 +36,7 @@ public class MemberOfCongressAPI {
             String url = "https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu?"
                     +"KEY=679a42edc23e42689b7f234817f46fc6"
                     +"&pIndex="+page
-                    +"&pSize="+299;
+                    +"&pSize="+5;
 //https://open.assembly.go.kr/portal/openapi/nubbgpxmawmzkclkc?KEY=679a42edc23e42689b7f234817f46fc6&pIndex=1&pSize=50
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();

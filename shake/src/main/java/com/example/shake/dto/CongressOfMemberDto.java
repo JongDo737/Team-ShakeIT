@@ -1,6 +1,8 @@
 package com.example.shake.dto;
 
+import com.example.shake.entity.CongressOfMember;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CongressOfMemberDto {
     private Long id;
     private String HG_NM;   // 이름
@@ -37,4 +40,36 @@ public class CongressOfMemberDto {
     private String create_date;        // 생성날짜
     private String update_date;        // 수정날짜
 
+    public CongressOfMember toEntity(){
+        return CongressOfMember.builder()
+                .id(id)
+                .HG_NM(HG_NM)
+                .HJ_NM(HJ_NM)
+                .ENG_NM(ENG_NM)
+                .BTH_GBN_NM(BTH_GBN_NM)
+                .BTH_DATE(BTH_DATE)
+                .img_URL(img_URL)
+                .JOB_RES_NM(JOB_RES_NM)
+                .POLY_NM(POLY_NM)
+                .ORIG_NM(ORIG_NM)
+                .ELECT_GBN_NM(ELECT_GBN_NM)
+                .CMIT_NM(CMIT_NM)
+                .CMITS(CMITS)
+                .REELE_GBN_NM(REELE_GBN_NM)
+                .UNITS(UNITS)
+                .SEX_GBN_NM(SEX_GBN_NM)
+                .TEL_NO(TEL_NO)
+                .E_MAIL(E_MAIL)
+                .HOMEPAGE(HOMEPAGE)
+                .STAFF(STAFF)
+                .SECRETARY(SECRETARY)
+                .SECRETARY2(SECRETARY2)
+                .MONA_CD(MONA_CD)
+                .MEM_TITLE(MEM_TITLE)
+                .ASSEM_ADDR(ASSEM_ADDR)
+                .create_date(create_date)
+                .update_date(update_date)
+                .build();
+
+    }
 }

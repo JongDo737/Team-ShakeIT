@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface APIService {
-    public void insertCongressOfMember(List<CongressOfMemberDto> members);
+    public String  insertCongressOfMember(List<CongressOfMemberDto> members);
 }
