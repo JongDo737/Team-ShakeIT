@@ -2,6 +2,7 @@ package com.example.shake.controller;
 
 import com.example.shake.api.IndexAPI;
 import com.example.shake.api.MemberOfCongressAPI;
+import com.example.shake.entity.CongressOfMember;
 import com.example.shake.entity.TestEntity;
 import com.example.shake.repository.TestRepository;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,7 @@ public class HelloController {
         return testRepository.findAll();
     }
     @GetMapping("/api")
-    public List<TestEntity> printAPI() throws Exception {
-        MemberOfCongressAPI.getMemberList();
+    public List<CongressOfMember> printAPI() throws Exception {
         return testRepository.findAll();
     }
     @GetMapping("/insertMember")
