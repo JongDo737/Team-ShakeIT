@@ -17,6 +17,7 @@ public class ProcessedPetitionDto {
     String proposer;
     String approver;
     String pro_dt;
+    String pro_result;
     String curr_committee;
     String url;
     String bill_id;
