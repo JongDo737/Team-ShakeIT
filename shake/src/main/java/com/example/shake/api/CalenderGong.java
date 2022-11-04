@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CalenderGong {
 
-    static String url = "https://open.assembly.go.kr/portal/openapi/nfcoioopazrwmjrgs?UNIT_CD=100021&";
+    static String url = "https://open.assembly.go.kr/portal/openapi/napvpafracrdkxmoq?UNIT_CD=100021&";
 
     // tag값의 정보를 가져오는 메소드
     private static String getTagValue(String tag, Element eElement) {
@@ -28,20 +28,19 @@ public class CalenderGong {
     }
 
     public static List<CalendarDto> getAPIList() throws ParserConfigurationException, IOException, SAXException {
-        int page = totalCount();  // 페이지 초기값
-        System.out.println("page : " + page);
+        int page = 1;  // 페이지 초기값
         // 총 개수 가져오기
         List<CalendarDto> calendarDtos = new ArrayList<>();
-        for (int i = 0; i < page; i++) {
+        for (int i = 1; i <= page; i++) {
             try {
                 // parsing할 url 지정(API 키 포함해서)
-                url += "KEY=679a42edc23e42689b7f234817f46fc6"
+                String urlFull = url + "KEY=679a42edc23e42689b7f234817f46fc6"
                         + "&pIndex=" + page
                         + "&pSize=" + 1000;
 
                 DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-                Document doc = dBuilder.parse(url);
+                Document doc = dBuilder.parse(urlFull);
 
                 // root tag
                 doc.getDocumentElement().normalize();
@@ -57,8 +56,12 @@ public class CalenderGong {
                         Element eElement = (Element) nNode;
                         //System.out.println(eElement.getTextContent());
 //                    System.out.println("MEETINGSESSION  : " +getTagValue("MEETINGSESSION", eElement)+" "+getTagValue("CHA", eElement));
-
-                        String date = getTagValue("MEETING_DATE", eElement).substring(0, 10).replace(".", "-");
+                        String date="";
+                        try {
+                            date = getTagValue("MEETING_DATE", eElement).substring(0, 10).replace(".", "-");
+                        }catch (NullPointerException e){
+                            System.out.println("null 입니당");
+                        }
                         if (date.contains("2022")) {
                             calendarDto.setDate(date);
                             calendarDto.setTitle(getTagValue("TITLE", eElement));
@@ -82,14 +85,14 @@ public class CalenderGong {
 
     public static int totalCount() throws ParserConfigurationException, IOException, SAXException {
         int page = 1;
-        url +=
+        String urlFull = url +
                 "KEY=679a42edc23e42689b7f234817f46fc6"
                         + "&pIndex=" + page
                         + "&pSize=1";
 
         DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-        Document doc = dBuilder.parse(url);
+        Document doc = dBuilder.parse(urlFull);
 
         // root tag
         doc.getDocumentElement().normalize();

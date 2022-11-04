@@ -27,20 +27,19 @@ public class CalenderGook {
     }
 
     public static List<CalendarDto> getAPIList() throws ParserConfigurationException, IOException, SAXException {
-        int page = totalCount();  // 페이지 초기값
-        System.out.println("page : " + page);
+        int page = 1;  // 페이지 초기값
         // 총 개수 가져오기
         List<CalendarDto> calendarDtos = new ArrayList<>();
-        for (int i = 0; i < page; i++) {
+        for (int i = 1; i <= page; i++) {
             try {
                 // parsing할 url 지정(API 키 포함해서)
-                url += "KEY=679a42edc23e42689b7f234817f46fc6"
+                String urlFull = url +"KEY=679a42edc23e42689b7f234817f46fc6"
                         + "&pIndex=" + page
                         + "&pSize=" + 1000;
 
                 DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-                Document doc = dBuilder.parse(url);
+                Document doc = dBuilder.parse(urlFull);
 
                 // root tag
                 doc.getDocumentElement().normalize();
@@ -62,16 +61,19 @@ public class CalenderGook {
                             convert = convert.split("-->")[1];
                         }
                         String date = getTagValue("SCHEDULEDATE", eElement);
+
+                        System.out.println(date);
                         String result = "";
-                        for (int i = 0; i < date.length(); i++) {
-                            result += date.charAt(i) + "";
-                            if (i == 3 || i == 5) {
+                        for (int j = 0; j < date.length(); j++) {
+                            result += date.charAt(j) + "";
+                            if (j == 3 || j == 5) {
                                 result += "-";
                             }
                         }
                         if (result.contains("2022")) {
                             calendarDto.setDate(result);
                             calendarDto.setTitle(convert);
+
                             calendarDto.setCode(4);
                             calendarDto.setTime(getTagValue("SCHEDULETIME", eElement));
                             calendarDtos.add(calendarDto);
@@ -89,14 +91,14 @@ public class CalenderGook {
     }  // main end
     public static int totalCount() throws ParserConfigurationException, IOException, SAXException {
         int page = 1;
-        url +=
+        String urlFull = url +
                 "KEY=679a42edc23e42689b7f234817f46fc6"
                         + "&pIndex=" + page
                         + "&pSize=1";
 
         DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-        Document doc = dBuilder.parse(url);
+        Document doc = dBuilder.parse(urlFull);
 
         // root tag
         doc.getDocumentElement().normalize();

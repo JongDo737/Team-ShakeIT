@@ -16,7 +16,6 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.util.List;
 
 @RestController
@@ -29,7 +28,7 @@ public class HelloController {
     @GetMapping("/test")
     public String printHello() throws Exception {
         IndexAPI.getAPIList();
-        return Calendar.getDate();
+        return Date.getDate();
     }
     @GetMapping("/api")
     public List<TestEntity> printAPI() throws Exception {
@@ -48,12 +47,25 @@ public class HelloController {
 
     @RequestMapping(value = "/getCalendarBon", produces = "application/json; charset=utf8")
     public void getCalendarBon() throws ParserConfigurationException, IOException, SAXException {
-//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
-        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
 
 //        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
+        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
+
+        calendarDtos.stream().forEach(System.out::println);
+
+    }
+    @RequestMapping(value = "/insertCalendar", produces = "application/json; charset=utf8")
+    public void insertCalendar() throws ParserConfigurationException, IOException, SAXException {
+
+//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
+        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
+
         calendarDtos.stream().forEach(System.out::println);
 
     }

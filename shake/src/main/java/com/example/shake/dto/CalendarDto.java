@@ -1,5 +1,6 @@
 package com.example.shake.dto;
 
+import com.example.shake.entity.Calendar;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,4 +28,14 @@ public class CalendarDto {
     private String time;
 
     private String url;
+    public Calendar toEntity(){
+        return Calendar.builder()
+                .code(code)
+                .title(title)
+                .committee_name(committee_name)
+                .date(date)
+                .time(time)
+                .url(url)
+                .build();
+    }
 }

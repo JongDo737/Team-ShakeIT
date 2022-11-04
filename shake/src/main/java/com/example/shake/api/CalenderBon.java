@@ -27,20 +27,19 @@ public class CalenderBon {
     }
 
     public static List<CalendarDto> getAPIList() throws ParserConfigurationException, IOException, SAXException {
-        int page = totalCount();  // 페이지 초기값
-        System.out.println("page : " + page);
+        int page = 1;  // 페이지 초기값
         // 총 개수 가져오기
         List<CalendarDto> calendarDtos = new ArrayList<>();
-        for (int i = 0; i < page; i++) {
+        for (int i = 1; i <= page; i++) {
             try {
                 // parsing할 url 지정(API 키 포함해서)
-                url += "KEY=679a42edc23e42689b7f234817f46fc6"
-                        + "&pIndex=" + page
+                String urlFull = url + "KEY=679a42edc23e42689b7f234817f46fc6"
+                        + "&pIndex=" + i
                         + "&pSize=" + 1000;
 
                 DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-                Document doc = dBuilder.parse(url);
+                Document doc = dBuilder.parse(urlFull);
 
                 // root tag
                 doc.getDocumentElement().normalize();
@@ -79,14 +78,14 @@ public class CalenderBon {
     }  // main end
     public static int totalCount() throws ParserConfigurationException, IOException, SAXException {
         int page = 1;
-        url +=
+        String urlFull = url +
                 "KEY=679a42edc23e42689b7f234817f46fc6"
                         + "&pIndex=" + page
                         + "&pSize=1";
 
         DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-        Document doc = dBuilder.parse(url);
+        Document doc = dBuilder.parse(urlFull);
 
         // root tag
         doc.getDocumentElement().normalize();

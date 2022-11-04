@@ -2,7 +2,7 @@ package com.example.shake.api;
 
 import java.time.LocalDate;
 
-public class Calendar {
+public class Date {
     public static String getDate() {
 
         // 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
