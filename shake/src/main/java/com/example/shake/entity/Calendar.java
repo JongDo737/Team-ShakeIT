@@ -28,9 +28,9 @@ public class Calendar {
     // 4 : 국회의장 일정
     // 5 : 공청회 일정
 
-    @Column(columnDefinition = "VARCHAR(45)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String title;
-    @Column(columnDefinition = "VARCHAR(45)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String committee_name;
 
     @Column(columnDefinition = "VARCHAR(45)")

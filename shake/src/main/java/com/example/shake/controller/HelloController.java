@@ -3,12 +3,15 @@ package com.example.shake.controller;
 import com.example.shake.api.*;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
+import com.example.shake.entity.Calendar;
 import com.example.shake.entity.CongressOfMember;
 import com.example.shake.entity.TestEntity;
+import com.example.shake.repository.CalenderRepository;
 import com.example.shake.repository.CongressOfMemberRepository;
 import com.example.shake.repository.TestRepository;
 import com.example.shake.service.APIService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +27,7 @@ public class HelloController {
     final TestRepository testRepository;
     final APIService apiService;
     final CongressOfMemberRepository congressOfMemberRepository;
+    final CalenderRepository calenderRepository;
 
     @GetMapping("/test")
     public String printHello() throws Exception {
@@ -58,10 +62,13 @@ public class HelloController {
 
     }
     @RequestMapping(value = "/insertCalendar", produces = "application/json; charset=utf8")
-    public void insertCalendar() throws ParserConfigurationException, IOException, SAXException {
-
-
-
+    public String insertCalendar() throws ParserConfigurationException, IOException, SAXException {
+        return apiService.insertCalenderDate();
     }
+    @RequestMapping(value = "/getCalendar", produces = "application/json; charset=utf8")
+    public List<Calendar> getCalendar() throws ParserConfigurationException, IOException, SAXException {
+        return calenderRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
+    }
+
 
 }
