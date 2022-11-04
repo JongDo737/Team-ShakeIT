@@ -11,6 +11,7 @@ import com.example.shake.repository.TestRepository;
 import com.example.shake.service.APIService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.xml.sax.SAXException;
 
@@ -40,7 +41,8 @@ public class HelloController {
         List<CongressOfMemberDto> congressOfMemberDtos = MemberOfCongressAPI.getAPIList();
         return apiService.insertCongressOfMember(congressOfMemberDtos);
     }
-    @GetMapping("/getCongressMember")
+
+    @RequestMapping(value = "/getCongressMember", produces = "application/json; charset=utf8")
     public List<CongressOfMember> getMember()  {
         return congressOfMemberRepository.findAll();
     }
