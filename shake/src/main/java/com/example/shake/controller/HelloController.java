@@ -1,8 +1,7 @@
 package com.example.shake.controller;
 
-import com.example.shake.api.Calendar;
-import com.example.shake.api.IndexAPI;
-import com.example.shake.api.MemberOfCongressAPI;
+import com.example.shake.api.*;
+import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.entity.CongressOfMember;
 import com.example.shake.entity.TestEntity;
@@ -46,4 +45,17 @@ public class HelloController {
     public List<CongressOfMember> getMember()  {
         return congressOfMemberRepository.findAll();
     }
+
+    @RequestMapping(value = "/getCalendarBon", produces = "application/json; charset=utf8")
+    public void getCalendarBon() throws ParserConfigurationException, IOException, SAXException {
+//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
+        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
+
+//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
+        calendarDtos.stream().forEach(System.out::println);
+
+    }
+
 }
