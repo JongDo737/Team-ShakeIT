@@ -41,6 +41,13 @@ public class APIServiceImpl implements APIService {
     public String insertCalenderDate() throws SAXException, ParserConfigurationException, IOException {
         // 데이터 넣기 람다 사용
         // 병렬화 사용 List 라서 효율 좋음 !
+        // 출력
+//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
+//        calendarDtos.stream().forEach(System.out::println);
 
         // 국회 세미나 데이터
         List<Calendar> calendarList = CalenderSemina.getAPIList().stream().parallel()

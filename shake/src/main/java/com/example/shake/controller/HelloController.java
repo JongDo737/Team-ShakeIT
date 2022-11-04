@@ -60,13 +60,7 @@ public class HelloController {
     @RequestMapping(value = "/insertCalendar", produces = "application/json; charset=utf8")
     public void insertCalendar() throws ParserConfigurationException, IOException, SAXException {
 
-//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
-        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
 
-        calendarDtos.stream().forEach(System.out::println);
 
     }
 
