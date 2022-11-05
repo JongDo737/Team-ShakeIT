@@ -6,9 +6,11 @@ import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.dto.PendingPetitionDto;
 import com.example.shake.entity.Calendar;
 import com.example.shake.entity.CongressOfMember;
+import com.example.shake.entity.PendingPetition;
 import com.example.shake.entity.TestEntity;
 import com.example.shake.repository.CalenderRepository;
 import com.example.shake.repository.CongressOfMemberRepository;
+import com.example.shake.repository.PendingPetitionRepository;
 import com.example.shake.repository.TestRepository;
 import com.example.shake.service.APIService;
 import lombok.AllArgsConstructor;
@@ -29,6 +31,7 @@ public class HelloController {
     final APIService apiService;
     final CongressOfMemberRepository congressOfMemberRepository;
     final CalenderRepository calenderRepository;
+    final PendingPetitionRepository pendingPetitionRepository;
     // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
@@ -68,12 +71,11 @@ public class HelloController {
     }
     // Calendar ##############################################
     @GetMapping("/getPendingPetition")
-    public void getPetitions() throws ParserConfigurationException, IOException, SAXException {
-        List<PendingPetitionDto> pendingPetitionDtos = PendingPetitionAPI.getAPIList();
-        pendingPetitionDtos.stream().forEach(System.out::println);
+    public List<PendingPetition> getPetitions() throws ParserConfigurationException, IOException, SAXException {
+        return pendingPetitionRepository.findAll();
     }
     @GetMapping("/insertPendingPetition45725453")
-    public void insertPendingPetitions() throws ParserConfigurationException, IOException, SAXException {
-
+    public String insertPendingPetitions() throws ParserConfigurationException, IOException, SAXException {
+        return apiService.insertPendingPetitions();
     }
 }

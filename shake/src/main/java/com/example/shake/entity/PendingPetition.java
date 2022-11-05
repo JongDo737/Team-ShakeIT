@@ -17,7 +17,7 @@ public class PendingPetition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
     @Column(columnDefinition = "VARCHAR(45)")
     String num;
     @Column(columnDefinition = "VARCHAR(45)")
