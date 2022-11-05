@@ -16,6 +16,7 @@ import java.util.List;
 
 public class CalenderSemina {
     static String url = "https://open.assembly.go.kr/portal/openapi/nfcoioopazrwmjrgs?";
+    static String[] nowDate = Date.getYearMonth().split("-");
 
     // tag값의 정보를 가져오는 메소드
     private static String getTagValue(String tag, Element eElement) {
@@ -57,7 +58,11 @@ public class CalenderSemina {
 //                    System.out.println("MEETINGSESSION  : " +getTagValue("MEETINGSESSION", eElement)+" "+getTagValue("CHA", eElement));
 
                         String date = getTagValue("SDATE", eElement).replace(".", "-");
-                        if (date.contains("2022")) {
+                        String[] schedules = date.split("-");
+                        int nowMonth = Integer.parseInt(nowDate[1]);
+                        int scheduleMonth = Integer.parseInt(schedules[1]);
+                        // 2022년이고 한달 전꺼부터 들고옴
+                        if (nowDate[0].equals(schedules[0]) && nowMonth<=scheduleMonth) {
                             calendarDto.setDate(date);
                             calendarDto.setTitle(getTagValue("TITLE", eElement));
                             calendarDto.setCommittee_name(getTagValue("DESCRIPTION", eElement));
@@ -66,7 +71,6 @@ public class CalenderSemina {
                             calendarDto.setUrl(getTagValue("LINK", eElement));
                             calendarDtos.add(calendarDto);
                         }
-
 
                     }  // for end
                 }  // if end

@@ -52,11 +52,11 @@ public class HelloController {
     @RequestMapping(value = "/getCalendarBon", produces = "application/json; charset=utf8")
     public void getCalendarBon() throws ParserConfigurationException, IOException, SAXException {
 
-//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
+        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
 //        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
 //        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
 //        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
-        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
 
         calendarDtos.stream().forEach(System.out::println);
 

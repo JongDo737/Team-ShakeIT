@@ -1,6 +1,7 @@
 package com.example.shake.api;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Date {
     public static String getDate() {
@@ -12,4 +13,10 @@ public class Date {
 
         return now+"";
     }
+    public static String getYearMonth(){
+        LocalDate now = LocalDate.now();
+        System.out.println("오늘 날짜 : "+now.getYear()+"-"+(now.getMonthValue()));
+        return now.getYear()+"-"+(now.getMonthValue()-1);
+    }
+
 }
