@@ -3,6 +3,7 @@ package com.example.shake.controller;
 import com.example.shake.api.*;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
+import com.example.shake.dto.PendingPetitionDto;
 import com.example.shake.entity.Calendar;
 import com.example.shake.entity.CongressOfMember;
 import com.example.shake.entity.TestEntity;
@@ -66,5 +67,13 @@ public class HelloController {
         return calenderRepository.findAll(Sort.by(Sort.Direction.ASC, "code"));
     }
     // Calendar ##############################################
+    @GetMapping("/getPendingPetition")
+    public void getPetitions() throws ParserConfigurationException, IOException, SAXException {
+        List<PendingPetitionDto> pendingPetitionDtos = PendingPetitionAPI.getAPIList();
+        pendingPetitionDtos.stream().forEach(System.out::println);
+    }
+    @GetMapping("/insertPendingPetition45725453")
+    public void insertPendingPetitions() throws ParserConfigurationException, IOException, SAXException {
 
+    }
 }

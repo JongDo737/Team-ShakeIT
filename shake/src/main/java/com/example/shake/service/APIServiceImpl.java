@@ -84,4 +84,11 @@ public class APIServiceImpl implements APIService {
 
         return "캘린더 데이터 넣기 성공";
     }
+
+    @Override
+    public String insertPendingPetitions() throws ParserConfigurationException, SAXException, IOException {
+//        PendingPetitionAPI.getAPIList().
+
+        return null;
+    }
 }

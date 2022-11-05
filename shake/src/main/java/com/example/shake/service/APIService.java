@@ -11,4 +11,6 @@ import java.util.List;
 public interface APIService {
     public String  insertCongressOfMember(List<CongressOfMemberDto> members);
     public String  insertCalenderDate() throws ParserConfigurationException, SAXException, IOException;
+
+    public String  insertPendingPetitions() throws ParserConfigurationException, SAXException, IOException;
 }
