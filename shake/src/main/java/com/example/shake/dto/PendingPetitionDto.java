@@ -12,16 +12,19 @@ import lombok.NoArgsConstructor;
 public class PendingPetitionDto {
 
     int id;
-    String num;
-    String age;
-    String name;
-    String proposer;
-    String approver;
-    String pro_dt;
-    String curr_committee;
-    String url;
-    String bill_id;
-    String committee_id;
+
+    String bill_id;//BILL_ID
+    String num;//BILL_NO
+    String age;//AGE
+    String name;//BILL_NAME
+    String proposer;//PROPOSER
+    String approver;//APPROVER
+    String pro_dt;//PROPOSE_DT
+    String committee_id;//CURR_COMMITTEE_ID
+    String curr_committee;//CURR_COMMITTEE
+    String curr_committee_dt; //COMMITTEE_DT
+    String url;//LINK_URL
+
 
 
 }

@@ -28,16 +28,7 @@ public class HelloController {
     final APIService apiService;
     final CongressOfMemberRepository congressOfMemberRepository;
     final CalenderRepository calenderRepository;
-
-    @GetMapping("/test")
-    public String printHello() throws Exception {
-        IndexAPI.getAPIList();
-        return Date.getDate();
-    }
-    @GetMapping("/api")
-    public List<TestEntity> printAPI() throws Exception {
-        return testRepository.findAll();
-    }
+    // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
         List<CongressOfMemberDto> congressOfMemberDtos = MemberOfCongressAPI.getAPIList();
@@ -48,7 +39,8 @@ public class HelloController {
     public List<CongressOfMember> getMember()  {
         return congressOfMemberRepository.findAll();
     }
-
+    // CongressMember ##############################################
+    // Calendar ##############################################
     @RequestMapping(value = "/getCalendarBon", produces = "application/json; charset=utf8")
     public void getCalendarBon() throws ParserConfigurationException, IOException, SAXException {
 
@@ -61,7 +53,7 @@ public class HelloController {
         calendarDtos.stream().forEach(System.out::println);
 
     }
-    @RequestMapping(value = "/insertCalendar", produces = "application/json; charset=utf8")
+    @RequestMapping(value = "/insertCalendar2y344t56uy55ergr4u5y", produces = "application/json; charset=utf8")
     public String insertCalendar() throws ParserConfigurationException, IOException, SAXException {
         return apiService.insertCalenderDate();
     }
@@ -69,6 +61,10 @@ public class HelloController {
     public List<Calendar> getCalendar() throws ParserConfigurationException, IOException, SAXException {
         return calenderRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
-
+    @RequestMapping(value = "/getCalendarByCode", produces = "application/json; charset=utf8")
+    public List<Calendar> getCalendarByCode() throws ParserConfigurationException, IOException, SAXException {
+        return calenderRepository.findAll(Sort.by(Sort.Direction.ASC, "code"));
+    }
+    // Calendar ##############################################
 
 }

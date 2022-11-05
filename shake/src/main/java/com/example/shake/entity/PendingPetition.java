@@ -32,5 +32,7 @@ public class PendingPetition {
     String bill_id;
     @Column(columnDefinition = "VARCHAR(45)")
     String committee_id;
+    @Column(columnDefinition = "VARCHAR(45)")
+    String curr_committee_dt;
 
 }
