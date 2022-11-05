@@ -107,4 +107,9 @@ public class APIServiceImpl implements APIService {
                 .forEach((ProcessedPetition) -> processedPetitionRepository.save(ProcessedPetition));
         return "만료된 청원 데이터 넣기 성공";
     }
+
+    @Override
+    public String insertLegislativeStatus() throws ParserConfigurationException, SAXException, IOException {
+        return null;
+    }
 }

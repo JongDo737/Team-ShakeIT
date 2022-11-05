@@ -3,6 +3,7 @@ package com.example.shake.controller;
 import com.example.shake.api.*;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
+import com.example.shake.dto.LegislativeStatusDto;
 import com.example.shake.dto.PendingPetitionDto;
 import com.example.shake.entity.*;
 import com.example.shake.repository.*;
@@ -27,6 +28,7 @@ public class HelloController {
     final CalenderRepository calenderRepository;
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
+    final LegislativeStatusRepository legislativeStatusRepository;
     // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
@@ -81,5 +83,18 @@ public class HelloController {
     @GetMapping("/insertProcessedPetition45725453")
     public String insertProcessedPetitions() throws ParserConfigurationException, IOException, SAXException {
         return apiService.insertProcessedPetitions();
+    }
+    // LegislativeStatus ##############################################
+    @GetMapping("/getLegislativeStatus")
+    public List<LegislativeStatus> getLegislativeStatus() throws ParserConfigurationException, IOException, SAXException {
+        return legislativeStatusRepository.findAll();
+    }
+    @GetMapping("/test11")
+    public void getLegitus() throws ParserConfigurationException, IOException, SAXException {
+        LegislativeStatusAPI.getAPIList().stream().forEach(System.out::println);
+    }
+    @GetMapping("/insertLegislativeStatus45725453")
+    public String insertLegislativeStatus() throws ParserConfigurationException, IOException, SAXException {
+        return apiService.insertLegislativeStatus();
     }
 }

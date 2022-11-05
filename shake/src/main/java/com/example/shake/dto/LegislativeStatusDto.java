@@ -20,6 +20,5 @@ public class LegislativeStatusDto {
     String noti_end_dt;//NOTI_ED_DT
     String link;//LINK_URL
     String proposer;//PROPOSER
-
     String committee_id;//CURR_COMMITTEE_ID
 }

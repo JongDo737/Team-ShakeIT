@@ -14,4 +14,5 @@ public interface APIService {
 
     public String  insertPendingPetitions() throws ParserConfigurationException, SAXException, IOException;
     public String  insertProcessedPetitions() throws ParserConfigurationException, SAXException, IOException;
+    public String  insertLegislativeStatus() throws ParserConfigurationException, SAXException, IOException;
 }
