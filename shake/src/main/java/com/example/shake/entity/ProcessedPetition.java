@@ -1,12 +1,18 @@
 package com.example.shake.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "processed_petition")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProcessedPetition {
 
     @Id
@@ -34,5 +40,7 @@ public class ProcessedPetition {
     String bill_id;
     @Column(columnDefinition = "VARCHAR(45)")
     String committee_id;
+    @Column(columnDefinition = "VARCHAR(45)")
+    String committee_dt; //COMMITTEE_DT
 
 }
