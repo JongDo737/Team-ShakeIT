@@ -4,12 +4,15 @@ import com.example.shake.api.*;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.dto.PendingPetitionDto;
+import com.example.shake.dto.ProcessedPetitionDto;
 import com.example.shake.entity.Calendar;
 import com.example.shake.entity.CongressOfMember;
 import com.example.shake.entity.PendingPetition;
+import com.example.shake.entity.ProcessedPetition;
 import com.example.shake.repository.CalenderRepository;
 import com.example.shake.repository.CongressOfMemberRepository;
 import com.example.shake.repository.PendingPetitionRepository;
+import com.example.shake.repository.ProcessedPetitionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
@@ -25,6 +28,7 @@ public class APIServiceImpl implements APIService {
     final CongressOfMemberRepository congressOfMemberRepository;
     final CalenderRepository calenderRepository;
     final PendingPetitionRepository pendingPetitionRepository;
+    final ProcessedPetitionRepository processedPetitionRepository;
 
     @Override
     public String insertCongressOfMember(List<CongressOfMemberDto> members) {
@@ -95,5 +99,12 @@ public class APIServiceImpl implements APIService {
         List<PendingPetition> pendingPetitions = PendingPetitionAPI.getAPIList().stream().map(PendingPetitionDto::toEntity).collect(Collectors.toList());
         pendingPetitionRepository.saveAll(pendingPetitions);
         return "진행중인 청원 데이터 넣기 성공";
+    }
+
+    @Override
+    public String insertProcessedPetitions() throws ParserConfigurationException, SAXException, IOException {
+        ProcessedPetitionAPI.getAPIList().stream().parallel().map(ProcessedPetitionDto::toEntity)
+                .forEach((ProcessedPetition) -> processedPetitionRepository.save(ProcessedPetition));
+        return "만료된 청원 데이터 넣기 성공";
     }
 }

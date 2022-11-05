@@ -4,14 +4,8 @@ import com.example.shake.api.*;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.dto.PendingPetitionDto;
-import com.example.shake.entity.Calendar;
-import com.example.shake.entity.CongressOfMember;
-import com.example.shake.entity.PendingPetition;
-import com.example.shake.entity.TestEntity;
-import com.example.shake.repository.CalenderRepository;
-import com.example.shake.repository.CongressOfMemberRepository;
-import com.example.shake.repository.PendingPetitionRepository;
-import com.example.shake.repository.TestRepository;
+import com.example.shake.entity.*;
+import com.example.shake.repository.*;
 import com.example.shake.service.APIService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -32,6 +26,7 @@ public class HelloController {
     final CongressOfMemberRepository congressOfMemberRepository;
     final CalenderRepository calenderRepository;
     final PendingPetitionRepository pendingPetitionRepository;
+    final ProcessedPetitionRepository processedPetitionRepository;
     // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
@@ -69,7 +64,7 @@ public class HelloController {
     public List<Calendar> getCalendarByCode() throws ParserConfigurationException, IOException, SAXException {
         return calenderRepository.findAll(Sort.by(Sort.Direction.ASC, "code"));
     }
-    // Calendar ##############################################
+    // PendingPetition ##############################################
     @GetMapping("/getPendingPetition")
     public List<PendingPetition> getPetitions() throws ParserConfigurationException, IOException, SAXException {
         return pendingPetitionRepository.findAll();
@@ -77,5 +72,14 @@ public class HelloController {
     @GetMapping("/insertPendingPetition45725453")
     public String insertPendingPetitions() throws ParserConfigurationException, IOException, SAXException {
         return apiService.insertPendingPetitions();
+    }
+    // ProcessedPetition ##############################################
+    @GetMapping("/getProcessedPetition")
+    public List<ProcessedPetition> getProcessedPetitions() throws ParserConfigurationException, IOException, SAXException {
+        return processedPetitionRepository.findAll();
+    }
+    @GetMapping("/insertProcessedPetition45725453")
+    public String insertProcessedPetitions() throws ParserConfigurationException, IOException, SAXException {
+        return apiService.insertProcessedPetitions();
     }
 }

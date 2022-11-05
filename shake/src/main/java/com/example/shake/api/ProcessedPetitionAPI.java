@@ -1,6 +1,7 @@
 package com.example.shake.api;
 
 import com.example.shake.dto.PendingPetitionDto;
+import com.example.shake.dto.ProcessedPetitionDto;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -25,10 +26,10 @@ public class ProcessedPetitionAPI {
         return nValue.getNodeValue();
     }
 
-    public static List<PendingPetitionDto> getAPIList() throws ParserConfigurationException, IOException, SAXException {
+    public static List<ProcessedPetitionDto> getAPIList() throws ParserConfigurationException, IOException, SAXException {
         int page = 1;  // 페이지 초기값
         // 총 개수 가져오기
-        List<PendingPetitionDto> pendingPetitionDtos = new ArrayList<>();
+        List<ProcessedPetitionDto> processedPetitionDtos = new ArrayList<>();
         for (int i = 1; i <= page; i++) {
             try {
                 // parsing할 url 지정(API 키 포함해서)
@@ -47,38 +48,25 @@ public class ProcessedPetitionAPI {
                 // 파싱할 tag
                 NodeList nList = doc.getElementsByTagName("row");
                 for (int temp = 0; temp < nList.getLength(); temp++) {
-                    PendingPetitionDto pendingPetitionDto = new PendingPetitionDto();
+                    ProcessedPetitionDto processedPetitionDto = new ProcessedPetitionDto();
                     Node nNode = nList.item(temp);
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                         Element eElement = (Element) nNode;
-                        //System.out.println(eElement.getTextContent());
-//                    System.out.println("MEETINGSESSION  : " +getTagValue("MEETINGSESSION", eElement)+" "+getTagValue("CHA", eElement));
-//                        int id;
-//
-//                        String bill_id;//BILL_ID
-//                        String num;//BILL_NO
-//                        String age;//AGE
-//                        String name;//BILL_NAME
-//                        String proposer;//PROPOSER
-//                        String approver;//APPROVER
-//                        String pro_dt;//PROPOSE_DT
-//                        String committee_id;//CURR_COMMITTEE_ID
-//                        String curr_committee;//CURR_COMMITTEE
-//                        String curr_committee_dt; //COMMITTEE_DT
-//                        String url;//LINK_URL
-                        pendingPetitionDto.setBill_id(getTagValue("BILL_ID", eElement));
-                        pendingPetitionDto.setNum(getTagValue("BILL_NO", eElement));
-                        pendingPetitionDto.setName(getTagValue("BILL_NAME", eElement));
-                        pendingPetitionDto.setAge(getTagValue("AGE", eElement));
-                        pendingPetitionDto.setProposer(getTagValue("PROPOSER", eElement));
-                        pendingPetitionDto.setPro_dt(getTagValue("PROPOSE_DT", eElement));
-                        pendingPetitionDto.setApprover(getTagValue("APPROVER", eElement));
-                        pendingPetitionDto.setCommittee_id(getTagValue("CURR_COMMITTEE_ID", eElement));
-                        pendingPetitionDto.setCurr_committee(getTagValue("CURR_COMMITTEE", eElement));
-                        pendingPetitionDto.setCurr_committee_dt(getTagValue("COMMITTEE_DT", eElement));
-                        pendingPetitionDto.setUrl(getTagValue("LINK_URL", eElement));
-                        pendingPetitionDtos.add(pendingPetitionDto);
+
+                        processedPetitionDto.setBill_id(getTagValue("BILL_ID", eElement));
+                        processedPetitionDto.setNum(getTagValue("BILL_NO", eElement));
+                        processedPetitionDto.setName(getTagValue("BILL_NAME", eElement));
+                        processedPetitionDto.setAge(getTagValue("AGE", eElement));
+                        processedPetitionDto.setProposer(getTagValue("PROPOSER", eElement));
+                        processedPetitionDto.setPro_dt(getTagValue("PROPOSE_DT", eElement));
+                        processedPetitionDto.setApprover(getTagValue("APPROVER", eElement));
+                        processedPetitionDto.setCommittee_id(getTagValue("CURR_COMMITTEE_ID", eElement));
+                        processedPetitionDto.setPro_result(getTagValue("PROC_RESULT_CD", eElement));
+                        processedPetitionDto.setCurr_committee(getTagValue("CURR_COMMITTEE", eElement));
+                        processedPetitionDto.setCommittee_dt(getTagValue("COMMITTEE_DT", eElement));
+                        processedPetitionDto.setUrl(getTagValue("LINK_URL", eElement));
+                        processedPetitionDtos.add(processedPetitionDto);
 
 
                     }  // for end
@@ -88,7 +76,7 @@ public class ProcessedPetitionAPI {
                 e.printStackTrace();
             }  // try~catch end
         }
-        return pendingPetitionDtos;
+        return processedPetitionDtos;
     }  // main end
     public static int totalCount() throws ParserConfigurationException, IOException, SAXException {
         int page = 1;
