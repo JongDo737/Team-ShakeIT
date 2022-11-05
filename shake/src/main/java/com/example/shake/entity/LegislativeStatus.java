@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class LegislativeStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
     @Column(columnDefinition = "VARCHAR(45)")
     String bill_no;
     @Column(columnDefinition = "MEDIUMTEXT")

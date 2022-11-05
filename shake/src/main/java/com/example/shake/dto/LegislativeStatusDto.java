@@ -11,14 +11,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LegislativeStatusDto {
     int id;
-    String bill_no;
-    String bill_name;
-    String age;
-    String pro_kind;
-    String curr_committee;
-    String noti_end_dt;
-    String link;
-    String proposer;
-    String bill_id;
-    String committee_id;
+    String bill_id;//BILL_ID
+    String bill_no;//BILL_NO
+    String bill_name;//BILL_NAME
+    String age;//AGE
+    String pro_kind;//PROPOSER_KIND_CD
+    String curr_committee;//CURR_COMMITTEE
+    String noti_end_dt;//NOTI_ED_DT
+    String link;//LINK_URL
+    String proposer;//PROPOSER
+
+    String committee_id;//CURR_COMMITTEE_ID
 }
