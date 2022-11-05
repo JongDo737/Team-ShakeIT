@@ -1,18 +1,9 @@
 package com.example.shake.service;
 
 import com.example.shake.api.*;
-import com.example.shake.dto.CalendarDto;
-import com.example.shake.dto.CongressOfMemberDto;
-import com.example.shake.dto.PendingPetitionDto;
-import com.example.shake.dto.ProcessedPetitionDto;
-import com.example.shake.entity.Calendar;
-import com.example.shake.entity.CongressOfMember;
-import com.example.shake.entity.PendingPetition;
-import com.example.shake.entity.ProcessedPetition;
-import com.example.shake.repository.CalenderRepository;
-import com.example.shake.repository.CongressOfMemberRepository;
-import com.example.shake.repository.PendingPetitionRepository;
-import com.example.shake.repository.ProcessedPetitionRepository;
+import com.example.shake.dto.*;
+import com.example.shake.entity.*;
+import com.example.shake.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
@@ -29,7 +20,7 @@ public class APIServiceImpl implements APIService {
     final CalenderRepository calenderRepository;
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
-
+    final LegislativeStatusRepository legislativeStatusRepository;
     @Override
     public String insertCongressOfMember(List<CongressOfMemberDto> members) {
 
@@ -110,6 +101,8 @@ public class APIServiceImpl implements APIService {
 
     @Override
     public String insertLegislativeStatus() throws ParserConfigurationException, SAXException, IOException {
-        return null;
+        LegislativeStatusAPI.getAPIList().parallelStream().map(LegislativeStatusDto::toEntity)
+                .forEach((LegislativeStatus) -> legislativeStatusRepository.save(LegislativeStatus));
+        return "진행중 입법예고 데이터 넣기 성공";
     }
 }

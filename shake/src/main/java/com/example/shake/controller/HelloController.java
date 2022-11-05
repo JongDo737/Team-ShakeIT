@@ -89,10 +89,6 @@ public class HelloController {
     public List<LegislativeStatus> getLegislativeStatus() throws ParserConfigurationException, IOException, SAXException {
         return legislativeStatusRepository.findAll();
     }
-    @GetMapping("/test11")
-    public void getLegitus() throws ParserConfigurationException, IOException, SAXException {
-        LegislativeStatusAPI.getAPIList().stream().forEach(System.out::println);
-    }
     @GetMapping("/insertLegislativeStatus45725453")
     public String insertLegislativeStatus() throws ParserConfigurationException, IOException, SAXException {
         return apiService.insertLegislativeStatus();
