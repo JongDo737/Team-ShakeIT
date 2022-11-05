@@ -25,14 +25,16 @@ public class APIServiceImpl implements APIService {
     @Override
     public String insertCongressOfMember(List<CongressOfMemberDto> members) {
 
-        for (int i = 0; i < members.size(); i++) {
-            members.get(i).setId(Long.parseLong(i+""));
-            members.get(i).setCreate_date(Date.getDate());
-            members.get(i).setUpdate_date(Date.getDate());
-            CongressOfMember congressOfMember = members.get(i).toEntity();
-            congressOfMemberRepository.save(congressOfMember);
-            System.out.println(congressOfMember.getHG_NM());
-        }
+//        for (int i = 0; i < members.size(); i++) {
+//            members.get(i).setId(Long.parseLong(i+""));
+//            members.get(i).setCreate_date(Date.getDate());
+//            members.get(i).setUpdate_date(Date.getDate());
+//            CongressOfMember congressOfMember = members.get(i).toEntity();
+//            congressOfMemberRepository.save(congressOfMember);
+//            System.out.println(congressOfMember.getHG_NM());
+//        }
+        members.stream().map(CongressOfMemberDto::toEntity).map(congressOfMemberRepository::save);
+
 
         return "국회의원 데이터 넣기 성공";
     }
