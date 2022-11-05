@@ -52,27 +52,24 @@ public class APIServiceImpl implements APIService {
         // 국회 세미나 데이터
         List<Calendar> calendarList = CalenderSemina.getAPIList().stream().parallel()
                 .map(CalendarDto::toEntity).collect(Collectors.toList());
-        calendarList.stream().parallel().forEach((calendar) -> calenderRepository.save(calendar));
-
+        calenderRepository.saveAll(calendarList);
         // 본회의 데이터
         calendarList = CalenderBon.getAPIList().stream().parallel()
                 .map(CalendarDto::toEntity).collect(Collectors.toList());
-        calendarList.stream().parallel().forEach((calendar) -> calenderRepository.save(calendar));
-
+        calenderRepository.saveAll(calendarList);
         // 위원회 데이터
         calendarList = CalenderWee.getAPIList().stream().parallel()
                 .map(CalendarDto::toEntity).collect(Collectors.toList());
-        calendarList.stream().parallel().forEach((calendar) -> calenderRepository.save(calendar));
-
+        calenderRepository.saveAll(calendarList);
         // 국회의장 데이터
         calendarList = CalenderGook.getAPIList().stream().parallel()
                 .map(CalendarDto::toEntity).collect(Collectors.toList());
-        calendarList.stream().parallel().forEach((calendar) -> calenderRepository.save(calendar));
-
+        calenderRepository.saveAll(calendarList);
         // 공청회 데이터
         calendarList = CalenderGong.getAPIList().stream().parallel()
                 .map(CalendarDto::toEntity).collect(Collectors.toList());
-        calendarList.stream().parallel().forEach((calendar) -> calenderRepository.save(calendar));
+        calenderRepository.saveAll(calendarList);
+
         return "캘린더 데이터 넣기 성공";
     }
 }
