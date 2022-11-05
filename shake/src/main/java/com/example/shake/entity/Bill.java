@@ -1,15 +1,21 @@
 package com.example.shake.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "Bill")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
     @Column(columnDefinition = "VARCHAR(45)")
     String daesu;
     @Column(columnDefinition = "VARCHAR(45)")

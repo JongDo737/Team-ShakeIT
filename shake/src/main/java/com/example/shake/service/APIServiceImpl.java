@@ -21,6 +21,7 @@ public class APIServiceImpl implements APIService {
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
     final LegislativeStatusRepository legislativeStatusRepository;
+    final BillRepository billRepository;
     @Override
     public String insertCongressOfMember(List<CongressOfMemberDto> members) {
 
@@ -104,5 +105,11 @@ public class APIServiceImpl implements APIService {
         LegislativeStatusAPI.getAPIList().parallelStream().map(LegislativeStatusDto::toEntity)
                 .forEach((LegislativeStatus) -> legislativeStatusRepository.save(LegislativeStatus));
         return "진행중 입법예고 데이터 넣기 성공";
+    }
+
+    @Override
+    public String insertBill() throws ParserConfigurationException, SAXException, IOException {
+        BillAPI.getAPIList().stream().parallel().map(BillDto::toEntity).distinct().forEach((Bill) -> billRepository.save(Bill));
+        return "본회의 처리안 데이터 넣기 성공";
     }
 }

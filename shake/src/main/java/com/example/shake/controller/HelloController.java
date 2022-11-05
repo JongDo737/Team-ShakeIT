@@ -29,6 +29,7 @@ public class HelloController {
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
     final LegislativeStatusRepository legislativeStatusRepository;
+    final BillRepository billRepository;
     // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
@@ -93,4 +94,15 @@ public class HelloController {
     public String insertLegislativeStatus() throws ParserConfigurationException, IOException, SAXException {
         return apiService.insertLegislativeStatus();
     }
+
+    // Bill ##############################################
+    @GetMapping("/getBill")
+    public List<Bill> getBill() throws ParserConfigurationException, IOException, SAXException {
+        return billRepository.findAll();
+    }
+    @GetMapping("/insertBill45725453")
+    public String insertBill() throws ParserConfigurationException, IOException, SAXException {
+        return apiService.insertBill();
+    }
+
 }
