@@ -35,7 +35,7 @@ public class PendingPetition {
     @Column(columnDefinition = "MEDIUMTEXT")
     String url;
     @Column(columnDefinition = "MEDIUMTEXT")
-    String bill_id;
+    String billid;
     @Column(columnDefinition = "VARCHAR(45)")
     String committee_id;
     @Column(columnDefinition = "VARCHAR(45)")

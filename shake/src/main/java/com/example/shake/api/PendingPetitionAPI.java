@@ -57,17 +57,7 @@ public class PendingPetitionAPI {
 //                    System.out.println("MEETINGSESSION  : " +getTagValue("MEETINGSESSION", eElement)+" "+getTagValue("CHA", eElement));
 //                        int id;
 //
-//                        String bill_id;//BILL_ID
-//                        String num;//BILL_NO
-//                        String age;//AGE
-//                        String name;//BILL_NAME
-//                        String proposer;//PROPOSER
-//                        String approver;//APPROVER
-//                        String pro_dt;//PROPOSE_DT
-//                        String committee_id;//CURR_COMMITTEE_ID
-//                        String curr_committee;//CURR_COMMITTEE
-//                        String curr_committee_dt; //COMMITTEE_DT
-//                        String url;//LINK_URL
+//
                         pendingPetitionDto.setBill_id(getTagValue("BILL_ID", eElement));
                         pendingPetitionDto.setNum(getTagValue("BILL_NO", eElement));
                         pendingPetitionDto.setName(getTagValue("BILL_NAME", eElement));

@@ -28,7 +28,7 @@ public class PendingPetitionDto {
 
     public PendingPetition toEntity(){
         return PendingPetition.builder()
-                .bill_id(bill_id)
+                .billid(bill_id)
                 .num(num)
                 .age(age)
                 .name(name)

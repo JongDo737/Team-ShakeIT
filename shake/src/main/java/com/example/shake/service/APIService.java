@@ -1,6 +1,7 @@
 package com.example.shake.service;
 
 import com.example.shake.dto.CongressOfMemberDto;
+import com.example.shake.entity.Bill;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -16,4 +17,5 @@ public interface APIService {
     public String  insertProcessedPetitions() throws ParserConfigurationException, SAXException, IOException;
     public String  insertLegislativeStatus() throws ParserConfigurationException, SAXException, IOException;
     public String  insertBill() throws ParserConfigurationException, SAXException, IOException;
+    public List<Bill> getBillNotAnnounceDt();
 }

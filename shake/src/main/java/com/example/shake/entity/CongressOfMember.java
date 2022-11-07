@@ -61,7 +61,7 @@ public class CongressOfMember {
     @Column(columnDefinition = "VARCHAR(45)")
     private String SECRETARY2;        // 비서
     @Column(columnDefinition = "VARCHAR(45)")
-    private String MONA_CD;        // 국회의원코드
+    private String MONACD;        // 국회의원코드
     @Column(columnDefinition = "MEDIUMTEXT")
     private String MEM_TITLE;        // 약력
     @Column(columnDefinition = "VARCHAR(45)")

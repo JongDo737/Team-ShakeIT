@@ -33,7 +33,8 @@ public class APIServiceImpl implements APIService {
 //            congressOfMemberRepository.save(congressOfMember);
 //            System.out.println(congressOfMember.getHG_NM());
 //        }
-        members.stream().map(CongressOfMemberDto::toEntity).map(congressOfMemberRepository::save);
+        members.stream().parallel().map(CongressOfMemberDto::toEntity)
+                .forEach((CongressOfMember)-> congressOfMemberRepository.save(CongressOfMember));
 
 
         return "국회의원 데이터 넣기 성공";
@@ -111,5 +112,15 @@ public class APIServiceImpl implements APIService {
     public String insertBill() throws ParserConfigurationException, SAXException, IOException {
         BillAPI.getAPIList().stream().parallel().map(BillDto::toEntity).distinct().forEach((Bill) -> billRepository.save(Bill));
         return "본회의 처리안 데이터 넣기 성공";
+    }
+
+    @Override
+    public List<Bill> getBillNotAnnounceDt() {
+        List<Bill> bills = billRepository.findAll();
+        bills = bills.stream()
+                .parallel()
+                .filter((bill) -> bill.getAnnounce_dt() != null)
+                .collect(Collectors.toList());
+        return bills;
     }
 }

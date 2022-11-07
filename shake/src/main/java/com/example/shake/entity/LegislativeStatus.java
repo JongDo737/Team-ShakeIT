@@ -34,7 +34,7 @@ public class LegislativeStatus {
     @Column(columnDefinition = "VARCHAR(45)")
     String proposer;
     @Column(columnDefinition = "MEDIUMTEXT")
-    String bill_id;
+    String billid;
     @Column(columnDefinition = "VARCHAR(45)")
     String committee_id;
 

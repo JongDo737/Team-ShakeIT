@@ -64,7 +64,7 @@ public class CongressOfMemberDto {
                 .STAFF(STAFF)
                 .SECRETARY(SECRETARY)
                 .SECRETARY2(SECRETARY2)
-                .MONA_CD(MONA_CD)
+                .MONACD(MONA_CD)
                 .MEM_TITLE(MEM_TITLE)
                 .ASSEM_ADDR(ASSEM_ADDR)
                 .create_date(create_date)

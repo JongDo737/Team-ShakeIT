@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PendingPetitionRepository extends JpaRepository<PendingPetition,Long> {
 
-
+    public boolean existsPendingPetitionByBillid(String billid);
 }
 

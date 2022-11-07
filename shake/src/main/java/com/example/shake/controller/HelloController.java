@@ -8,6 +8,7 @@ import com.example.shake.dto.PendingPetitionDto;
 import com.example.shake.entity.*;
 import com.example.shake.repository.*;
 import com.example.shake.service.APIService;
+import com.example.shake.service.APIUpdateAutomatic;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import java.util.List;
 public class HelloController {
     final TestRepository testRepository;
     final APIService apiService;
+    final APIUpdateAutomatic apiUpdateAutomatic;
     final CongressOfMemberRepository congressOfMemberRepository;
     final CalenderRepository calenderRepository;
     final PendingPetitionRepository pendingPetitionRepository;
@@ -46,11 +48,11 @@ public class HelloController {
     @RequestMapping(value = "/getCalendarBon", produces = "application/json; charset=utf8")
     public void getCalendarBon() throws ParserConfigurationException, IOException, SAXException {
 
-        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
+//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
 //        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
 //        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
 //        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
+        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
 
         calendarDtos.stream().forEach(System.out::println);
 
@@ -98,11 +100,23 @@ public class HelloController {
     // Bill ##############################################
     @GetMapping("/getBill")
     public List<Bill> getBill() throws ParserConfigurationException, IOException, SAXException {
-        return billRepository.findAll();
+        return apiService.getBillNotAnnounceDt();
     }
     @GetMapping("/insertBill45725453")
     public String insertBill() throws ParserConfigurationException, IOException, SAXException {
         return apiService.insertBill();
     }
+
+    @GetMapping("/updateDB")
+    public String updateData() throws ParserConfigurationException, IOException, SAXException {
+        return apiUpdateAutomatic.updateDataBase();
+    }
+
+    @GetMapping("/getMessageList")
+    public List<Bill> message() throws ParserConfigurationException, IOException, SAXException {
+        return apiUpdateAutomatic.getNotInDBBillList();
+    }
+
+
 
 }

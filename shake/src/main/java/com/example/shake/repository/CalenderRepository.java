@@ -11,7 +11,7 @@ import java.util.List;
 // JPA는 인터페이스 선언만으로도 자동으로 스프링의 빈(Bean)으로 등록된다
 @Repository
 public interface CalenderRepository extends JpaRepository<Calendar,Long> {
-
-
+    public boolean existsCalendarByTitle(String title);
+    public boolean existsCalendarByUrl(String url);
 }
 

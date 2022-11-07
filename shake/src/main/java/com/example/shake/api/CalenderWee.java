@@ -56,10 +56,10 @@ public class CalenderWee {
                         //System.out.println(eElement.getTextContent());
 
                         String date = getTagValue("MEETING_DATE", eElement).substring(0, 10).replace(".", "-");
-
-                        if (date.contains("2022")) {
+                        String title = getTagValue("SESS", eElement) + " " + getTagValue("DEGREE", eElement) + " " + getTagValue("TITLE", eElement);
+                        if (date.contains("2022") && !title.contains("공청회")) {
                             calendarDto.setDate(date);
-                            calendarDto.setTitle(getTagValue("SESS", eElement) + " " + getTagValue("DEGREE", eElement) + " " + getTagValue("TITLE", eElement));
+                            calendarDto.setTitle(title);
                             calendarDto.setCode(3);
                             calendarDto.setCommittee_name(getTagValue("COMMITTEE_NAME", eElement));
                             calendarDto.setTime(getTagValue("MEETING_TIME", eElement));

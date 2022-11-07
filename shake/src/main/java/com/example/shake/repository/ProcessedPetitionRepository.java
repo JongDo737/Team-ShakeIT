@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProcessedPetitionRepository extends JpaRepository<ProcessedPetition,Long> {
 
-
+    public boolean existsProcessedPetitionByBillid(String billid);
 }
 

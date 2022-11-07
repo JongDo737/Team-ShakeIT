@@ -27,7 +27,7 @@ public class ProcessedPetitionDto {
     String committee_dt; //COMMITTEE_DT
     public ProcessedPetition toEntity(){
         return ProcessedPetition.builder()
-                .bill_id(bill_id)
+                .billid(bill_id)
                 .num(num)
                 .age(age)
                 .name(name)

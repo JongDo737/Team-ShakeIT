@@ -24,7 +24,7 @@ public class LegislativeStatusDto {
     String committee_id;//CURR_COMMITTEE_ID
     public LegislativeStatus toEntity(){
         return LegislativeStatus.builder()
-                .bill_id(bill_id)
+                .billid(bill_id)
                 .bill_no(bill_no)
                 .bill_name(bill_name)
                 .age(age)

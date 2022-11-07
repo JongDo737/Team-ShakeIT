@@ -38,7 +38,7 @@ public class BillDto {
                 .announce_dt(announce_dt)
                 .url(url)
                 .rgs_proc_dt(rgs_proc_dt)
-                .bill_id(bill_id)
+                .billid(bill_id)
                 .curr_committee_id(curr_committee_id)
                 .build();
     }

@@ -14,5 +14,6 @@ import java.util.List;
 @Repository
 public interface CongressOfMemberRepository extends JpaRepository<CongressOfMember,Long> {
     List<CongressOfMember> findAll();
+    boolean existsCongressOfMemberByMONACD(String MONACD);
 }
 

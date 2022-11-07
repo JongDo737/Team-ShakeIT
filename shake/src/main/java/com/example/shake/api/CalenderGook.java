@@ -61,8 +61,6 @@ public class CalenderGook {
                             convert = convert.split("-->")[1];
                         }
                         String date = getTagValue("SCHEDULEDATE", eElement);
-
-                        System.out.println(date);
                         String result = "";
                         for (int j = 0; j < date.length(); j++) {
                             result += date.charAt(j) + "";

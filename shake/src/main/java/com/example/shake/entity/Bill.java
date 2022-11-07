@@ -39,7 +39,7 @@ public class Bill {
     @Column(columnDefinition = "MEDIUMTEXT")
     String rgs_proc_dt;
     @Column(columnDefinition = "MEDIUMTEXT")
-    String bill_id;
+    String billid;
     @Column(columnDefinition = "MEDIUMTEXT")
     String curr_committee_id;
 
