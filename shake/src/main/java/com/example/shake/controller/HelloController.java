@@ -1,6 +1,8 @@
 package com.example.shake.controller;
 
 import com.example.shake.api.*;
+import com.example.shake.api.auto.Scheduler;
+import com.example.shake.api.auto.URLConnect;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.dto.LegislativeStatusDto;
@@ -117,6 +119,19 @@ public class HelloController {
         return apiUpdateAutomatic.getNotInDBBillList();
     }
 
+    @GetMapping("/startThread")
+    public void thread() throws IOException {
+        Scheduler scheduler = new Scheduler();
+        System.out.println("스케줄러 생성 !!");
+        scheduler.execute(() -> {
+            try {
+                URLConnect.go();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        },0,0,1);
+
+    }
 
 
 }
