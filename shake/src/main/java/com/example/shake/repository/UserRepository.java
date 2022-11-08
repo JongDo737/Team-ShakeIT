@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 // JPA는 인터페이스 선언만으로도 자동으로 스프링의 빈(Bean)으로 등록된다
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-
+    boolean existsByToken(String token);
 }
 

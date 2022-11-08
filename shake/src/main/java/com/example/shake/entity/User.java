@@ -19,7 +19,7 @@ public class User {
     Long id;
     @Column(columnDefinition = "MEDIUMTEXT")
     String token;
-    @Column(columnDefinition = "VARCHER(20)")
+    @Column(columnDefinition = "VARCHAR(20)")
     String createdate;
 
 
