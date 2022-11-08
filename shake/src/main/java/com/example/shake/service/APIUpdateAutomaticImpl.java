@@ -1,6 +1,7 @@
 package com.example.shake.service;
 
 import com.example.shake.api.*;
+import com.example.shake.api.auto.URLConnect;
 import com.example.shake.dto.*;
 import com.example.shake.entity.*;
 import com.example.shake.repository.*;
@@ -22,6 +23,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
     final LegislativeStatusRepository legislativeStatusRepository;
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
+    final UserRepository userRepository;
     @Override
     public String updateDataBase() throws ParserConfigurationException, IOException, SAXException {
 //        // 국회의원 코드로 검색해서 있는지 검색
@@ -87,7 +89,24 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
                 .collect(Collectors.toList());
         System.out.println("없는 입법 목록 추가");
         billList.stream().forEach(System.out::println);
-        billRepository.saveAll(billList);
+//        billRepository.saveAll(billList);
+        // 1개 이상이면 푸쉬 메시지 전송
+        if(billList.size() > 0) {
+            for(int i=0; i<billList.size(); i++) {
+                List<User> userList = userRepository.findAll();
+                int finalI = i;
+                userList.stream().parallel().forEach((user) -> {
+                    try {
+                        URLConnect.sendMessage(user.getToken(),"새로운 입법 정보가 도착했어요.", billList.get(finalI).getBill_name());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+        }
+
+
         return billList;
     }
     @Override
