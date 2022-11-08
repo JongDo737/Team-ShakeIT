@@ -89,7 +89,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
                 .collect(Collectors.toList());
         System.out.println("없는 입법 목록 추가");
         billList.stream().forEach(System.out::println);
-//        billRepository.saveAll(billList);
+        billRepository.saveAll(billList);
         // 1개 이상이면 푸쉬 메시지 전송
         if(billList.size() > 0) {
             for(int i=0; i<billList.size(); i++) {
