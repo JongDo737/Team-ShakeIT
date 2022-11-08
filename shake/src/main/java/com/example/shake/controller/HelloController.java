@@ -133,7 +133,7 @@ public class HelloController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        },0,0,1);
+        },10,0,0);
         return "DB자동 수정기능 ON";
     }
 
@@ -148,7 +148,7 @@ public class HelloController {
                 requestDTO.getBody());
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/sendPushMsg/{token}/{title}/{body}")
+    @GetMapping("/sendPushMsg/{token}/{title}/{body}")
     public ResponseEntity sendMsg(@PathVariable("token") String token,@PathVariable("title") String title, @PathVariable("body") String body) throws IOException {
         firebaseCloudMessageService.sendMessageTo(
                 token,
