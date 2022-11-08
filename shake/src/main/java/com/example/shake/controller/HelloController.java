@@ -11,6 +11,7 @@ import com.example.shake.api.firebase.FirebaseCloudMessageService;
 import com.example.shake.repository.*;
 import com.example.shake.service.APIService;
 import com.example.shake.service.APIUpdateAutomatic;
+import com.example.shake.service.PushAlerm;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,9 @@ public class HelloController {
     final ProcessedPetitionRepository processedPetitionRepository;
     final LegislativeStatusRepository legislativeStatusRepository;
     final BillRepository billRepository;
-    private final FirebaseCloudMessageService firebaseCloudMessageService;
+    final FirebaseCloudMessageService firebaseCloudMessageService;
+    final PushAlerm pushAlerm;
+
     // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
@@ -143,6 +147,13 @@ public class HelloController {
                 requestDTO.getTitle(),
                 requestDTO.getBody());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/push/{tokens}")
+    public List<String> insertToken(@PathVariable("tokens") String tokens) {
+        System.out.println(tokens);
+        pushAlerm.insertUserToken(tokens);
+        return List.of("토큰받기 성공");
     }
 
 }
