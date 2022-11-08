@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class URLConnect {
     public static void go() throws IOException {
-        URL url = new URL("https://1485-164-125-221-236.jp.ngrok.io/updateDB");
+        URL url = new URL("https://http://3.35.187.40:8080/updateDB");
         // HTTP Connection 구하기
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
