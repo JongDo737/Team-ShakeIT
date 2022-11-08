@@ -5,8 +5,6 @@ import com.example.shake.api.auto.Scheduler;
 import com.example.shake.api.auto.URLConnect;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
-import com.example.shake.dto.LegislativeStatusDto;
-import com.example.shake.dto.PendingPetitionDto;
 import com.example.shake.entity.*;
 import com.example.shake.repository.*;
 import com.example.shake.service.APIService;
@@ -132,6 +130,4 @@ public class HelloController {
         },0,0,1);
         return "DB자동 수정기능 ON";
     }
-
-
 }
