@@ -3,17 +3,18 @@ package com.example.shake.controller;
 import com.example.shake.api.*;
 import com.example.shake.api.auto.Scheduler;
 import com.example.shake.api.auto.URLConnect;
+import com.example.shake.api.firebase.RequestDTO;
 import com.example.shake.dto.CalendarDto;
 import com.example.shake.dto.CongressOfMemberDto;
 import com.example.shake.entity.*;
+import com.example.shake.api.firebase.FirebaseCloudMessageService;
 import com.example.shake.repository.*;
 import com.example.shake.service.APIService;
 import com.example.shake.service.APIUpdateAutomatic;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,6 +33,7 @@ public class HelloController {
     final ProcessedPetitionRepository processedPetitionRepository;
     final LegislativeStatusRepository legislativeStatusRepository;
     final BillRepository billRepository;
+    private final FirebaseCloudMessageService firebaseCloudMessageService;
     // CongressMember ##############################################
     @GetMapping("/insertCongressMemberencodemeomd")
     public String insertMember() throws ParserConfigurationException, IOException, SAXException {
@@ -130,4 +132,17 @@ public class HelloController {
         },0,0,1);
         return "DB자동 수정기능 ON";
     }
+
+    @PostMapping("/api/fcm")
+    public ResponseEntity pushMessage(@RequestBody RequestDTO requestDTO) throws IOException {
+        System.out.println(requestDTO.getTargetToken() + " "
+                +requestDTO.getTitle() + " " + requestDTO.getBody());
+
+        firebaseCloudMessageService.sendMessageTo(
+                requestDTO.getTargetToken(),
+                requestDTO.getTitle(),
+                requestDTO.getBody());
+        return ResponseEntity.ok().build();
+    }
+
 }
