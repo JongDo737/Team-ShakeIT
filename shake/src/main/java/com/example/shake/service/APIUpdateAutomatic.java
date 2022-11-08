@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface APIUpdateAutomatic {
     public String updateDataBase() throws ParserConfigurationException, IOException, SAXException;
-    public List<Bill> getNotInDBBillList() throws ParserConfigurationException, IOException, SAXException;
-    public List<Calendar> getNotInDBCalendarList() throws ParserConfigurationException, IOException, SAXException;
 
-    }
+    public List<Bill> getNotInDBBillList() throws ParserConfigurationException, IOException, SAXException;
+
+    public  List<Calendar> getNotInDBCalendarList() throws ParserConfigurationException, IOException, SAXException;
+
+}

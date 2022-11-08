@@ -137,7 +137,7 @@ public class HelloController {
         return "DB자동 수정기능 ON";
     }
 
-    @PostMapping("/api/fcm")
+    @PostMapping("/api/fcm/")
     public ResponseEntity pushMessage(@RequestBody RequestDTO requestDTO) throws IOException {
         System.out.println(requestDTO.getTargetToken() + " "
                 +requestDTO.getTitle() + " " + requestDTO.getBody());
@@ -146,6 +146,14 @@ public class HelloController {
                 requestDTO.getTargetToken(),
                 requestDTO.getTitle(),
                 requestDTO.getBody());
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/sendPushMsg/{token}/{title}/{body}")
+    public ResponseEntity sendMsg(@PathVariable("token") String token,@PathVariable("title") String title, @PathVariable("body") String body) throws IOException {
+        firebaseCloudMessageService.sendMessageTo(
+                token,
+                title,
+                body);
         return ResponseEntity.ok().build();
     }
 

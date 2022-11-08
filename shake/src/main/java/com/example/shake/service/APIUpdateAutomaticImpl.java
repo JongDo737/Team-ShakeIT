@@ -46,7 +46,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
         //캘린더
         List<Calendar> calendarList = getNotInDBCalendarList();
         calendarList.stream().forEach(System.out::println);
-//        calenderRepository.saveAll(calendarList);
+        calenderRepository.saveAll(calendarList);
 
         // 진행중 청원
         List<PendingPetition> pendingPetitions = PendingPetitionAPI.getAPIList()
