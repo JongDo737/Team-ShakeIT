@@ -120,7 +120,7 @@ public class HelloController {
     }
 
     @GetMapping("/startThread")
-    public void thread() throws IOException {
+    public String thread() throws IOException {
         Scheduler scheduler = new Scheduler();
         System.out.println("스케줄러 생성 !!");
         scheduler.execute(() -> {
@@ -130,7 +130,7 @@ public class HelloController {
                 throw new RuntimeException(e);
             }
         },0,0,1);
-
+        return "DB자동 수정기능 ON";
     }
 
 
