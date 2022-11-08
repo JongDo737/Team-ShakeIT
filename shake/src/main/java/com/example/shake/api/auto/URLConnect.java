@@ -16,7 +16,7 @@ import java.net.URL;
 public class URLConnect {
 
     public static void go() throws IOException {
-        URL url = new URL("https://3.35.187.40:8080/updateDB");
+        URL url = new URL("http://3.35.187.40:8080/updateDB");
         // HTTP Connection 구하기
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -34,7 +34,7 @@ public class URLConnect {
 
     }
     public static void sendMessage(String token, String title, String body) throws IOException {
-        String API_URL = "https://3.35.187.40:8080/sendPushMsg/"+token+"/"+title+"/"+body;
+        String API_URL = "http://3.35.187.40:8080/sendPushMsg/"+token+"/"+title+"/"+body;
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(API_URL)
