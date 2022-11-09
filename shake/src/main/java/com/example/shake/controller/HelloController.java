@@ -122,22 +122,6 @@ public class HelloController {
     public List<Bill> message() throws ParserConfigurationException, IOException, SAXException {
         return apiUpdateAutomatic.getNotInDBBillList();
     }
-
-    @GetMapping("/startThread")
-    public String thread() throws IOException {
-        Scheduler scheduler = new Scheduler();
-        System.out.println("스케줄러 생성 !!");
-        scheduler.execute(() -> {
-            try {
-                URLConnect.go();
-                URLConnect.updateBill();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        },10,0,0);
-        return "DB자동 수정기능 ON";
-    }
-
     @PostMapping("/api/fcm/")
     public ResponseEntity pushMessage(@RequestBody RequestDTO requestDTO) throws IOException {
         System.out.println(requestDTO.getTargetToken() + " "
