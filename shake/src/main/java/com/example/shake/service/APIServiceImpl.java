@@ -10,6 +10,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -119,7 +120,7 @@ public class APIServiceImpl implements APIService {
         List<Bill> bills = billRepository.findAll();
         bills = bills.stream()
                 .parallel()
-                .filter((bill) -> bill.getAnnounce_dt() != null)
+                .sorted(Comparator.comparing(Bill::getAnnounce_dt).reversed())
                 .collect(Collectors.toList());
         return bills;
     }

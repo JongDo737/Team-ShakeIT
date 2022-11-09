@@ -49,27 +49,31 @@ public class BillAPI {
                 // 파싱할 tag
                 NodeList nList = doc.getElementsByTagName("row");
                 for (int temp = 0; temp < nList.getLength(); temp++) {
-                    BillDto billDto = new BillDto();
+
                     Node nNode = nList.item(temp);
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                         Element eElement = (Element) nNode;
+                        System.out.println(getTagValue("ANNOUNCE_DT", eElement));
+                        if(getTagValue("ANNOUNCE_DT", eElement) != null) {
+                            BillDto billDto = new BillDto();
+                            billDto.setDaesu(getTagValue("AGE", eElement));
+                            billDto.setBill_num(getTagValue("BILL_NO", eElement));
+                            billDto.setBill_name(getTagValue("BILL_NM", eElement));
+                            billDto.setPropersor(getTagValue("PROPOSER", eElement));
+                            billDto.setCommittee_nm(getTagValue("COMMITTEE_NM", eElement));
+                            billDto.setProc_result(getTagValue("PROC_RESULT_CD", eElement));
+                            billDto.setProc_date(getTagValue("PROPOSE_DT", eElement));
+                            billDto.setCurr_trans_dt(getTagValue("CURR_TRANS_DT", eElement));
+                            billDto.setAnnounce_dt(getTagValue("ANNOUNCE_DT", eElement));
+                            billDto.setUrl(getTagValue("LINK_URL", eElement));
+                            billDto.setRgs_proc_dt(getTagValue("RGS_PROC_DT", eElement));
+                            billDto.setBill_id(getTagValue("BILL_ID", eElement));
+                            billDto.setCurr_committee_id(getTagValue("CURR_COMMITTEE_ID", eElement));
 
-                        billDto.setDaesu(getTagValue("AGE", eElement));
-                        billDto.setBill_num(getTagValue("BILL_NO", eElement));
-                        billDto.setBill_name(getTagValue("BILL_NM", eElement));
-                        billDto.setPropersor(getTagValue("PROPOSER", eElement));
-                        billDto.setCommittee_nm(getTagValue("COMMITTEE_NM", eElement));
-                        billDto.setProc_result(getTagValue("PROC_RESULT_CD", eElement));
-                        billDto.setProc_date(getTagValue("PROPOSE_DT", eElement));
-                        billDto.setCurr_trans_dt(getTagValue("CURR_TRANS_DT", eElement));
-                        billDto.setAnnounce_dt(getTagValue("ANNOUNCE_DT", eElement));
-                        billDto.setUrl(getTagValue("LINK_URL", eElement));
-                        billDto.setRgs_proc_dt(getTagValue("RGS_PROC_DT", eElement));
-                        billDto.setBill_id(getTagValue("BILL_ID", eElement));
-                        billDto.setCurr_committee_id(getTagValue("CURR_COMMITTEE_ID", eElement));
+                            billDtos.add(billDto);
+                        }
 
-                        billDtos.add(billDto);
 
 
 
