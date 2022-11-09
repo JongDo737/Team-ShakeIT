@@ -130,6 +130,7 @@ public class HelloController {
         scheduler.execute(() -> {
             try {
                 URLConnect.go();
+                URLConnect.updateBill();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

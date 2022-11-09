@@ -33,6 +33,16 @@ public class URLConnect {
 
 
     }
+    public static void updateBill() throws IOException {
+        String API_URL = "http://3.35.187.40:8080/getMessageList";
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(API_URL)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response.body().string());
+
+    }
     public static void sendMessage(String token, String title, String body) throws IOException {
         String API_URL = "http://3.35.187.40:8080/sendPushMsg/"+token+"/"+title+"/"+body;
         OkHttpClient client = new OkHttpClient();
