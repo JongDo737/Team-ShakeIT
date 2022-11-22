@@ -21,7 +21,9 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -47,7 +49,7 @@ public class HelloController {
 
     @RequestMapping(value = "/getCongressMember", produces = "application/json; charset=utf8")
     public List<CongressOfMember> getMember()  {
-        return congressOfMemberRepository.findAll();
+        return congressOfMemberRepository.findAll().stream().sorted(Comparator.comparing(CongressOfMember::getHG_NM)).collect(Collectors.toList());
     }
     // CongressMember ##############################################
     // Calendar ##############################################
