@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 public class HelloController {
-    final TestRepository testRepository;
     final APIService apiService;
     final APIUpdateAutomatic apiUpdateAutomatic;
     final CongressOfMemberRepository congressOfMemberRepository;
@@ -38,6 +37,7 @@ public class HelloController {
     final LegislativeStatusRepository legislativeStatusRepository;
     final BillRepository billRepository;
     final FirebaseCloudMessageService firebaseCloudMessageService;
+    final NotificationRepository notificationRepository;
     final PushAlerm pushAlerm;
 
     // CongressMember ##############################################
@@ -150,5 +150,8 @@ public class HelloController {
         pushAlerm.insertUserToken(tokens);
         return List.of("토큰받기 성공");
     }
-
+    @GetMapping("/getNotification")
+    public List<Notification> getNotis(){
+        return notificationRepository.findAllByOrderByCreatedateDescCodeAsc();
+    }
 }
