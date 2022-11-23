@@ -79,6 +79,8 @@ public class MemberOfCongressAPI {
                     congressOfMemberDto.setMEM_TITLE(getTagValue("MEM_TITLE", eElement));
                     congressOfMemberDto.setASSEM_ADDR(getTagValue("ASSEM_ADDR", eElement));
                     congressOfMemberDto.setImg_URL(getMemberURL(temp));
+                    congressOfMemberDto.setCreate_date(Date.getDate());
+                    congressOfMemberDto.setUpdate_date(Date.getDate());
                     totalList.add(congressOfMemberDto);
 
                 }  // for end

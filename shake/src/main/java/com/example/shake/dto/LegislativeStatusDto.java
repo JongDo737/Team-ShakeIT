@@ -22,6 +22,8 @@ public class LegislativeStatusDto {
     String link;//LINK_URL
     String proposer;//PROPOSER
     String committee_id;//CURR_COMMITTEE_ID
+    private String create_date;        // 생성날짜
+    private String update_date;        // 수정날짜
     public LegislativeStatus toEntity(){
         return LegislativeStatus.builder()
                 .billid(bill_id)
@@ -34,6 +36,8 @@ public class LegislativeStatusDto {
                 .link(link)
                 .proposer(proposer)
                 .committee_id(committee_id)
+                .create_date(create_date)
+                .update_date(update_date)
                 .build();
     }
 }

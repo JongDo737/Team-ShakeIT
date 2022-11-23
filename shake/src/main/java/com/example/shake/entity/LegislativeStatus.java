@@ -39,6 +39,10 @@ public class LegislativeStatus {
     String billid;
     @Column(columnDefinition = "VARCHAR(45)")
     String committee_id;
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String create_date;        // 생성날짜
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String update_date;        // 수정날짜
 
     public Notification toNotification(){
         return Notification.builder()

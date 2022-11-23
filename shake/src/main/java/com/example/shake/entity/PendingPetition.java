@@ -43,8 +43,9 @@ public class PendingPetition {
     @Column(columnDefinition = "VARCHAR(45)")
     String curr_committee_dt;
     @Column(columnDefinition = "VARCHAR(45)")
-    String createdate;
-
+    private String create_date;        // 생성날짜
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String update_date;        // 수정날짜
     public Notification toNotification(){
         return Notification.builder()
                 .title(name)

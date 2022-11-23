@@ -66,6 +66,8 @@ public class ProcessedPetitionAPI {
                         processedPetitionDto.setCurr_committee(getTagValue("CURR_COMMITTEE", eElement));
                         processedPetitionDto.setCommittee_dt(getTagValue("COMMITTEE_DT", eElement));
                         processedPetitionDto.setUrl(getTagValue("LINK_URL", eElement));
+                        processedPetitionDto.setCreate_date(Date.getDate());
+                        processedPetitionDto.setUpdate_date(Date.getDate());
                         processedPetitionDtos.add(processedPetitionDto);
 
 

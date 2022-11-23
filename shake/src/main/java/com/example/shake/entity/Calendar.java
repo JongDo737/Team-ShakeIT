@@ -43,7 +43,10 @@ public class Calendar {
 
     @Column(columnDefinition = "MEDIUMTEXT")
     private String url;
-
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String create_date;        // 생성날짜
+    @Column(columnDefinition = "VARCHAR(45)")
+    private String update_date;        // 수정날짜
     public Notification toNotification(){
         return Notification.builder()
                 .title(title)

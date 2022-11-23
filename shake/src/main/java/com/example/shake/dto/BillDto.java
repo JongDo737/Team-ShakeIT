@@ -25,6 +25,8 @@ public class BillDto {
     String rgs_proc_dt;//RGS_PROC_DT
     String bill_id;//BILL_ID
     String curr_committee_id;//CURR_COMMITTEE_ID
+    private String create_date;        // 생성날짜
+    private String update_date;        // 수정날짜
     public Bill toEntity() {
         return Bill.builder()
                 .daesu(daesu)
@@ -40,6 +42,8 @@ public class BillDto {
                 .rgs_proc_dt(rgs_proc_dt)
                 .billid(bill_id)
                 .curr_committee_id(curr_committee_id)
+                .create_date(create_date)
+                .update_date(update_date)
                 .build();
     }
 }

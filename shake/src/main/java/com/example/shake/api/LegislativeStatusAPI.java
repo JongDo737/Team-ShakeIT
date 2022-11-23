@@ -63,6 +63,8 @@ public class LegislativeStatusAPI {
                         legislativeStatusDto.setLink(getTagValue("LINK_URL", eElement));
                         legislativeStatusDto.setProposer(getTagValue("PROPOSER", eElement));
                         legislativeStatusDto.setCommittee_id(getTagValue("CURR_COMMITTEE_ID", eElement));
+                        legislativeStatusDto.setCreate_date(Date.getDate());
+                        legislativeStatusDto.setUpdate_date(Date.getDate());
                         legislativeStatusDtos.add(legislativeStatusDto);
 
 

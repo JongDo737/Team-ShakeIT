@@ -64,6 +64,8 @@ public class CalenderWee {
                             calendarDto.setCommittee_name(getTagValue("COMMITTEE_NAME", eElement));
                             calendarDto.setTime(getTagValue("MEETING_TIME", eElement));
                             calendarDto.setUrl(getTagValue("LINK_URL2", eElement));
+                            calendarDto.setCreate_date(Date.getDate());
+                            calendarDto.setUpdate_date(Date.getDate());
                             calendarDtos.add(calendarDto);
                         }
 

@@ -69,6 +69,8 @@ public class CalenderSemina {
                             calendarDto.setCode(1);
                             calendarDto.setTime(getTagValue("STIME", eElement));
                             calendarDto.setUrl(getTagValue("LINK", eElement));
+                            calendarDto.setCreate_date(Date.getDate());
+                            calendarDto.setUpdate_date(Date.getDate());
                             calendarDtos.add(calendarDto);
                         }
 

@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface PendingPetitionRepository extends JpaRepository<PendingPetition,Long> {
 
     public boolean existsPendingPetitionByBillid(String billid);
-    public boolean existsAllByCreatedate(String createdate);
 }
 

@@ -25,6 +25,8 @@ public class ProcessedPetitionDto {
     String curr_committee;//CURR_COMMITTEE
     String url;//LINK_URL
     String committee_dt; //COMMITTEE_DT
+    private String create_date;        // 생성날짜
+    private String update_date;        // 수정날짜
     public ProcessedPetition toEntity(){
         return ProcessedPetition.builder()
                 .billid(bill_id)
@@ -39,6 +41,8 @@ public class ProcessedPetitionDto {
                 .committee_dt(committee_dt)
                 .curr_committee(curr_committee)
                 .url(url)
+                .create_date(create_date)
+                .update_date(update_date)
                 .build();
     }
 }

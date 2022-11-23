@@ -71,7 +71,8 @@ public class CalenderGook {
                         if (result.contains("2022")) {
                             calendarDto.setDate(result);
                             calendarDto.setTitle(convert);
-
+                            calendarDto.setCreate_date(Date.getDate());
+                            calendarDto.setUpdate_date(Date.getDate());
                             calendarDto.setCode(4);
                             calendarDto.setTime(getTagValue("SCHEDULETIME", eElement));
                             calendarDtos.add(calendarDto);

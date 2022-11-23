@@ -63,6 +63,8 @@ public class CalenderBon {
                             calendarDto.setCode(2);
                             calendarDto.setTime(getTagValue("MEETTING_TIME", eElement));
                             calendarDto.setUrl(getTagValue("LINK_URL", eElement));
+                            calendarDto.setCreate_date(Date.getDate());
+                            calendarDto.setUpdate_date(Date.getDate());
                             calendarDtos.add(calendarDto);
                         }
 

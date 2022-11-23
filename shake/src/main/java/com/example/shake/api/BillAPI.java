@@ -70,7 +70,8 @@ public class BillAPI {
                             billDto.setRgs_proc_dt(getTagValue("RGS_PROC_DT", eElement));
                             billDto.setBill_id(getTagValue("BILL_ID", eElement));
                             billDto.setCurr_committee_id(getTagValue("CURR_COMMITTEE_ID", eElement));
-
+                            billDto.setCreate_date(Date.getDate());
+                            billDto.setUpdate_date(Date.getDate());
                             billDtos.add(billDto);
                         }
 

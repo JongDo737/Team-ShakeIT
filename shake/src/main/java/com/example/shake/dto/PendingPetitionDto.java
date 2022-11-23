@@ -25,7 +25,9 @@ public class PendingPetitionDto {
     String curr_committee;//CURR_COMMITTEE
     String curr_committee_dt; //COMMITTEE_DT
     String url;//LINK_URL
-    String createdate;
+
+    private String create_date;        // 생성날짜
+    private String update_date;        // 수정날짜
 
     public PendingPetition toEntity(){
         return PendingPetition.builder()
@@ -40,7 +42,8 @@ public class PendingPetitionDto {
                 .curr_committee(curr_committee)
                 .curr_committee_dt(curr_committee_dt)
                 .url(url)
-                .createdate(createdate)
+                .create_date(create_date)
+                .update_date(update_date)
                 .build();
     }
 

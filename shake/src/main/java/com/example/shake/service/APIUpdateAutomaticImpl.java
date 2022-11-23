@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,7 +91,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
 
         // 새로 생긴 데이터가 존재할 때 공지사항 DB에 저장
         if(calendarList.size() != 0 || pendingPetitions.size() != 0 || processedPetitions.size() != 0 || legislativeStatuses.size() != 0){
-            List<Notification> notiList =  calendarList.stream().map(Calendar::toNotification).collect(Collectors.toList());
+            List<Notification> notiList =  new ArrayList<>();
             notiList.addAll(pendingPetitions.stream().map(PendingPetition::toNotification).collect(Collectors.toList()));
             notiList.addAll(processedPetitions.stream().map(ProcessedPetition::toNotification).collect(Collectors.toList()));
             notiList.addAll(legislativeStatuses.stream().map(LegislativeStatus::toNotification).collect(Collectors.toList()));

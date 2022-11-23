@@ -28,6 +28,8 @@ public class CalendarDto {
     private String time;
 
     private String url;
+    private String create_date;        // 생성날짜
+    private String update_date;        // 수정날짜
     public Calendar toEntity(){
         return Calendar.builder()
                 .code(code)
@@ -36,6 +38,8 @@ public class CalendarDto {
                 .date(date)
                 .time(time)
                 .url(url)
+                .create_date(create_date)
+                .update_date(update_date)
                 .build();
     }
 }
