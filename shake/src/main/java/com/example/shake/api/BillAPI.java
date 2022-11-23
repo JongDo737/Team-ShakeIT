@@ -54,8 +54,8 @@ public class BillAPI {
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                         Element eElement = (Element) nNode;
-                        System.out.println(getTagValue("ANNOUNCE_DT", eElement));
                         if(getTagValue("ANNOUNCE_DT", eElement) != null) {
+                            System.out.println(getTagValue("ANNOUNCE_DT", eElement));
                             BillDto billDto = new BillDto();
                             billDto.setDaesu(getTagValue("AGE", eElement));
                             billDto.setBill_num(getTagValue("BILL_NO", eElement));

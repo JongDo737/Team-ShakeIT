@@ -49,7 +49,7 @@ public class HelloController {
 
     @RequestMapping(value = "/getCongressMember", produces = "application/json; charset=utf8")
     public List<CongressOfMember> getMember()  {
-        return congressOfMemberRepository.findAll().stream().sorted(Comparator.comparing(CongressOfMember::getHG_NM)).collect(Collectors.toList());
+        return congressOfMemberRepository.findAll();
     }
     // CongressMember ##############################################
     // Calendar ##############################################

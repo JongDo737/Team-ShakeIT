@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
+public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
     final BillRepository billRepository;
     final CalenderRepository calenderRepository;
     final CongressOfMemberRepository congressOfMemberRepository;
@@ -24,6 +24,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
     final UserRepository userRepository;
+
     @Override
     public String updateDataBase() throws ParserConfigurationException, IOException, SAXException {
 //        // 국회의원 코드로 검색해서 있는지 검색
@@ -35,14 +36,14 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
 //        System.out.println("없는 국회의원 목록 추가");
 //        congressOfMemberList.stream().forEach(System.out::println);
 //        congressOfMemberRepository.saveAll(congressOfMemberList);
-//
+
         //진행중 청원은 태이블 지우고 새로해야함
         System.out.println("진행중 청원 DB 수정합니다.");
         legislativeStatusRepository.deleteAll();
         List<LegislativeStatus> legislativeStatuses = LegislativeStatusAPI.getAPIList().stream()
                 .parallel().map(LegislativeStatusDto::toEntity).collect(Collectors.toList());
         legislativeStatusRepository.saveAll(legislativeStatuses);
-        System.out.println("진행중 청원 " + legislativeStatuses.size()+"개 새로고침");
+        System.out.println("진행중 청원 " + legislativeStatuses.size() + "개 새로고침");
 
 
         //캘린더
@@ -80,35 +81,31 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic{
 
         return "헷";
     }
+
     public List<Bill> getNotInDBBillList() throws ParserConfigurationException, IOException, SAXException {
 // 입법 bill
         List<Bill> billList = BillAPI.getAPIList().stream()
                 .parallel()
                 .map(BillDto::toEntity)
-                .filter((Bill)-> !billRepository.existsBillByBillid(Bill.getBillid()))
+                .filter((Bill) -> !billRepository.existsBillByBillid(Bill.getBillid()))
                 .collect(Collectors.toList());
         System.out.println("없는 입법 목록 추가");
         billList.stream().forEach(System.out::println);
         billRepository.saveAll(billList);
         // 1개 이상이면 푸쉬 메시지 전송
-        if(billList.size() > 0) {
-            for(int i=0; i<billList.size(); i++) {
-                List<User> userList = userRepository.findAll();
-                int finalI = i;
-                userList.stream().parallel().forEach((user) -> {
-                    try {
-                        URLConnect.sendMessage(user.getToken(),"새로운 입법 정보가 도착했어요.", billList.get(finalI).getBill_name());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            }
-
+        if (billList.size() > 0) {
+            List<User> userList = userRepository.findAll();
+            userList.stream().parallel().forEach((user) -> {
+                try {
+                    URLConnect.sendMessage(user.getToken(), "새로운 입법 정보가 도착했어요.", billList.get(0).getBill_name() + " 외 " + (billList.size() - 1) + "건");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
-
-
         return billList;
     }
+
     @Override
     public List<Calendar> getNotInDBCalendarList() throws ParserConfigurationException, IOException, SAXException {
         // 1 : 국회의원 세미나

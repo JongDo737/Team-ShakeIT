@@ -25,19 +25,8 @@ public class APIServiceImpl implements APIService {
     final BillRepository billRepository;
     @Override
     public String insertCongressOfMember(List<CongressOfMemberDto> members) {
-
-//        for (int i = 0; i < members.size(); i++) {
-//            members.get(i).setId(Long.parseLong(i+""));
-//            members.get(i).setCreate_date(Date.getDate());
-//            members.get(i).setUpdate_date(Date.getDate());
-//            CongressOfMember congressOfMember = members.get(i).toEntity();
-//            congressOfMemberRepository.save(congressOfMember);
-//            System.out.println(congressOfMember.getHG_NM());
-//        }
-        members.stream().parallel().map(CongressOfMemberDto::toEntity)
+        members.stream().map(CongressOfMemberDto::toEntity).sorted(Comparator.comparing(CongressOfMember::getHG_NM))
                 .forEach((CongressOfMember)-> congressOfMemberRepository.save(CongressOfMember));
-
-
         return "국회의원 데이터 넣기 성공";
     }
 
@@ -46,13 +35,6 @@ public class APIServiceImpl implements APIService {
         // 데이터 넣기 람다 사용
         // 병렬화 사용 List 라서 효율 좋음 !
         // 출력
-//        List<CalendarDto> calendarDtos = CalenderSemina.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderBon.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderWee.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderGook.getAPIList();
-//        List<CalendarDto> calendarDtos = CalenderGong.getAPIList();
-//        calendarDtos.stream().forEach(System.out::println);
-
         // 국회 세미나 데이터
         List<Calendar> calendarList = CalenderSemina.getAPIList().stream().parallel()
                 .map(CalendarDto::toEntity).collect(Collectors.toList());
