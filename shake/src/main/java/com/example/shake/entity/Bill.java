@@ -1,11 +1,14 @@
 package com.example.shake.entity;
 
+import com.example.shake.api.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "Bill")
@@ -43,4 +46,11 @@ public class Bill {
     @Column(columnDefinition = "MEDIUMTEXT")
     String curr_committee_id;
 
+    public Notification toNotification(){
+        return Notification.builder()
+                .title(bill_name)
+                .code("1")
+                .createdate(Date.getDate())
+                .build();
+    }
 }

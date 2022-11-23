@@ -24,6 +24,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
     final PendingPetitionRepository pendingPetitionRepository;
     final ProcessedPetitionRepository processedPetitionRepository;
     final UserRepository userRepository;
+    final NotificationRepository notificationRepository;
 
     @Override
     public String updateDataBase() throws ParserConfigurationException, IOException, SAXException {
@@ -38,20 +39,12 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
 //        congressOfMemberRepository.saveAll(congressOfMemberList);
 
         //진행중 청원은 태이블 지우고 새로해야함
-        System.out.println("진행중 청원 DB 수정합니다.");
-        legislativeStatusRepository.deleteAll();
-        List<LegislativeStatus> legislativeStatuses = LegislativeStatusAPI.getAPIList().stream()
-                .parallel().map(LegislativeStatusDto::toEntity).collect(Collectors.toList());
-        legislativeStatusRepository.saveAll(legislativeStatuses);
-        System.out.println("진행중 청원 " + legislativeStatuses.size() + "개 새로고침");
-
-
-        //캘린더
-        List<Calendar> calendarList = getNotInDBCalendarList();
-        calendarList.stream().forEach(System.out::println);
-        calenderRepository.saveAll(calendarList);
-
-        // 진행중 청원
+//        System.out.println("진행중 청원 DB 수정합니다.");
+//        pendingPetitionRepository.deleteAll();
+//        List<PendingPetition> pendingPetitions = PendingPetitionAPI.getAPIList().stream()
+//                .parallel().map(PendingPetitionDto::toEntity).collect(Collectors.toList());
+//        pendingPetitionRepository.saveAll(pendingPetitions);
+//        System.out.println("진행중 청원 " + pendingPetitions.size() + "개 새로고침");
         List<PendingPetition> pendingPetitions = PendingPetitionAPI.getAPIList()
                 .stream()
                 .parallel()
@@ -60,8 +53,25 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
                         !pendingPetitionRepository.existsPendingPetitionByBillid(pendingPetition.getBillid()))
                 .collect(Collectors.toList());
         System.out.println("없는 진행중 청원 목록 추가");
-        pendingPetitions.stream().forEach(System.out::println);
         pendingPetitionRepository.saveAll(pendingPetitions);
+
+
+        //캘린더
+        List<Calendar> calendarList = getNotInDBCalendarList();
+        calendarList.stream().forEach(System.out::println);
+        calenderRepository.saveAll(calendarList);
+
+        // 종료 입법
+        List<LegislativeStatus> legislativeStatuses = LegislativeStatusAPI.getAPIList()
+                .stream()
+                .parallel()
+                .map((LegislativeStatusDto::toEntity))
+                .filter(legislativeStatus ->
+                        !legislativeStatusRepository.existsLegislativeStatusByBillid(legislativeStatus.getBillid()))
+                .collect(Collectors.toList());
+        System.out.println("없는 종료 입법 목록 추가");
+        legislativeStatuses.stream().forEach(System.out::println);
+        legislativeStatusRepository.saveAll(legislativeStatuses);
 
 
         // 완료된 청원
@@ -78,6 +88,16 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
 
         System.out.println("새로고침 완료");
 
+        // 새로 생긴 데이터가 존재할 때 공지사항 DB에 저장
+        if(calendarList.size() != 0 || pendingPetitions.size() != 0 || processedPetitions.size() != 0 || legislativeStatuses.size() != 0){
+            List<Notification> notiList =  calendarList.stream().map(Calendar::toNotification).collect(Collectors.toList());
+            notiList.addAll(pendingPetitions.stream().map(PendingPetition::toNotification).collect(Collectors.toList()));
+            notiList.addAll(processedPetitions.stream().map(ProcessedPetition::toNotification).collect(Collectors.toList()));
+            notiList.addAll(legislativeStatuses.stream().map(LegislativeStatus::toNotification).collect(Collectors.toList()));
+            System.out.println("공지사항 추가");
+            notiList.stream().forEach(System.out::println);
+            notificationRepository.saveAll(notiList);
+        }
 
         return "헷";
     }
@@ -94,6 +114,8 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
         billRepository.saveAll(billList);
         // 1개 이상이면 푸쉬 메시지 전송
         if (billList.size() > 0) {
+            List<Notification> notiList =  billList.stream().map(Bill::toNotification).collect(Collectors.toList());
+            notificationRepository.saveAll(notiList);
             List<User> userList = userRepository.findAll();
             userList.stream().parallel().forEach((user) -> {
                 try {

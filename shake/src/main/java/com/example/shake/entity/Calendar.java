@@ -1,11 +1,13 @@
 package com.example.shake.entity;
 
+import com.example.shake.api.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Data
@@ -42,4 +44,12 @@ public class Calendar {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String url;
 
+    public Notification toNotification(){
+        return Notification.builder()
+                .title(title)
+                .code("2")
+                .createdate(Date.getDate())
+                .build();
+    }
 }
+

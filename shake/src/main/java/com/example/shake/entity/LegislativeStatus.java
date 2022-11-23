@@ -1,11 +1,13 @@
 package com.example.shake.entity;
 
+import com.example.shake.api.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -38,4 +40,11 @@ public class LegislativeStatus {
     @Column(columnDefinition = "VARCHAR(45)")
     String committee_id;
 
+    public Notification toNotification(){
+        return Notification.builder()
+                .title(bill_name)
+                .code("3")
+                .createdate(Date.getDate())
+                .build();
+    }
 }

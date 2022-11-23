@@ -69,6 +69,7 @@ public class PendingPetitionAPI {
                         pendingPetitionDto.setCurr_committee(getTagValue("CURR_COMMITTEE", eElement));
                         pendingPetitionDto.setCurr_committee_dt(getTagValue("COMMITTEE_DT", eElement));
                         pendingPetitionDto.setUrl(getTagValue("LINK_URL", eElement));
+                        pendingPetitionDto.setCreatedate(Date.getDate());
                         pendingPetitionDtos.add(pendingPetitionDto);
 
 

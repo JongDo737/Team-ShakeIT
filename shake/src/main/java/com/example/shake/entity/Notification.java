@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,7 +21,7 @@ public class Notification {
     Long id;
 
     @Column
-    private int code;
+    private String code;
     // 1 : 종료 입법
     // 2 : 일
     // 3 : 진행 입법
@@ -30,9 +31,7 @@ public class Notification {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String title;
 
-    @Column(columnDefinition = "MEDIUMTEXT")
-    private String url;
 
     @Column
-    private Date createdate;
+    private String createdate;
 }
