@@ -90,7 +90,6 @@ public class APIServiceImpl implements APIService {
                 .forEach((LegislativeStatus) -> legislativeStatusRepository.save(LegislativeStatus));
         return "진행중 입법예고 데이터 넣기 성공";
     }
-
     @Override
     public String insertBill() throws ParserConfigurationException, SAXException, IOException {
         BillAPI.getAPIList().stream().parallel().map(BillDto::toEntity).distinct().forEach((Bill) -> billRepository.save(Bill));
