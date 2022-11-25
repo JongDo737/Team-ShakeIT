@@ -33,7 +33,7 @@ public class ShakeApplication {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-		},15,0,0);
+		},15,0,0); // 15 + 9 = 24
 	}
 
 }
