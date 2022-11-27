@@ -90,7 +90,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
         System.out.println("새로고침 완료");
 
         // 새로 생긴 데이터가 존재할 때 공지사항 DB에 저장
-        if(calendarList.size() != 0 || pendingPetitions.size() != 0 || processedPetitions.size() != 0 || legislativeStatuses.size() != 0){
+        if(pendingPetitions.size() > 0 || processedPetitions.size() > 0 || legislativeStatuses.size() > 0){
             notificationRepository.deleteAll();
             List<Notification> notiList =  new ArrayList<>();
             notiList.addAll(pendingPetitions.stream().map(PendingPetition::toNotification).collect(Collectors.toList()));
