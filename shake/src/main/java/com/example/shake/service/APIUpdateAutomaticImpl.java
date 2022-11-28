@@ -90,9 +90,9 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
         System.out.println("새로고침 완료");
 
         // 새로 생긴 데이터가 존재할 때 공지사항 DB에 저장
-        if(pendingPetitions.size() > 0 || processedPetitions.size() > 0 || legislativeStatuses.size() > 0){
+        if (pendingPetitions.size() > 0 || processedPetitions.size() > 0 || legislativeStatuses.size() > 0) {
             notificationRepository.deleteAll();
-            List<Notification> notiList =  new ArrayList<>();
+            List<Notification> notiList = new ArrayList<>();
             notiList.addAll(pendingPetitions.stream().map(PendingPetition::toNotification).collect(Collectors.toList()));
             notiList.addAll(processedPetitions.stream().map(ProcessedPetition::toNotification).collect(Collectors.toList()));
             notiList.addAll(legislativeStatuses.stream().map(LegislativeStatus::toNotification).collect(Collectors.toList()));
@@ -116,7 +116,7 @@ public class APIUpdateAutomaticImpl implements APIUpdateAutomatic {
         billRepository.saveAll(billList);
         // 1개 이상이면 푸쉬 메시지 전송
         if (billList.size() > 0) {
-            List<Notification> notiList =  billList.stream().map(Bill::toNotification).collect(Collectors.toList());
+            List<Notification> notiList = billList.stream().map(Bill::toNotification).collect(Collectors.toList());
             notificationRepository.saveAll(notiList);
             List<User> userList = userRepository.findAll();
             userList.stream().parallel().forEach((user) -> {
